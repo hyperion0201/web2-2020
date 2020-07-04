@@ -4,7 +4,7 @@ import "./style.scss";
 function Homepage() {
   return (
     <div className="App">
-      <div className="classcon">dsadasdasdsad</div>
+      <div className="classcon">asasaas</div>
     </div>
   );
 }
