@@ -7,11 +7,11 @@ function Header(props) {
     <div className="header">
       <div className="nav-bar">
         <p>VNBC Bank</p>
-        <div className="btn-group">
+        <div className="link-group">
           <a href="/login" className="link-btn">
             Log in
           </a>
-          <a href="/sign-up" className="link-btn sign-up">
+          <a href="/register" className="link-btn sign-up">
             Sign up
           </a>
         </div>

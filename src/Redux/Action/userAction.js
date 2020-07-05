@@ -1,28 +1,21 @@
 import axios from "axios";
-const baseURL = window.AppConfigs.baseUrl;
+import configs from "../../Configs";
+const baseURL = configs.baseUrl;
 
 const request = async (method, url, data) => {
-  const res = await axios({
+  return axios({
     method,
     baseURL,
     url,
-    data,
-    header: {
-      "Content-Type": "application/json",
-    },
     json: true,
+    ...data,
   });
-  if (!res.ok) {
-    const { error } = await res.json();
-    throw Error(error);
-  }
-  return res.json();
 };
 
-export const login = async (data) => {
-  return request("POST", "/login", { data });
+export const login = (data) => {
+  return request("POST", "login", { data });
 };
 
-export const register = async (data) => {
-  return request("POST", "/register", { data });
+export const register = (data) => {
+  return request("POST", "register", { data });
 };

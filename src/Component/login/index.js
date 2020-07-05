@@ -4,7 +4,6 @@ import "./style.scss";
 function Login() {
   return (
     <div className="Login">
-      <div className="top"></div>
       <h2 className="nexttop">Welcome back!</h2>
       <p class="description">
         Log in to access your dashboard, settings and Snacks.
@@ -22,7 +21,7 @@ function Login() {
           <label for="password" class="label">
             <span>
               <div className="label-password">
-                Password<a className="forgotpassword">Forgot password?</a>
+                Password<a className="forgotpassword" href="#">Forgot password?</a>
               </div>
             </span>
           </label>
@@ -33,7 +32,7 @@ function Login() {
         </button>
         <p className="bottom">
           Create account?{" "}
-          <a class="button-create-account" href="">
+          <a class="button-create-account" href="/register">
             Create an account
           </a>
           .
