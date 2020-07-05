@@ -1,0 +1,22 @@
+.tab-content {
+  width: auto;
+}
+.modal-body {
+  align-items: center;
+  text-align: center;
+}
+.modal-header {
+  flex-direction: column-reverse;
+  align-items: center;
+}
+.modal-footer {
+  justify-content: center;
+}
+.btn-group {
+  display: flex;
+  flex-direction: column;
+}
+.label-name {
+  width: 250px;
+  margin: auto !important;
+}
