@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Homepage, Header } from "./Component";
+import { Homepage, Header, Login, Signup } from "./Component";
 
 function App() {
   return (
