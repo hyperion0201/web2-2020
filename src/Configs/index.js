@@ -1,8 +1,7 @@
 const configs = {
-    baseUrl: 'https://'
-  };
-  
-  window.AppConfigs = configs;
-  
-  export default configs;
-  
+  baseUrl: "https://web2-be.herokuapp.com/",
+};
+
+window.AppConfigs = configs;
+
+export default configs;
