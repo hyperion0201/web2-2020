@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import './style.scss';
-import { Button, Modal, ButtonGroup, ToggleButton } from 'react-bootstrap';
+import React, { useState } from "react";
+import "./style.scss";
+import { Button, Modal, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 function Account() {
   const [show, setShow] = useState(false);
@@ -9,11 +10,13 @@ function Account() {
   const handleShow = () => setShow(true);
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleClose();
+    toast.success("🦄 Create bank account successfully!");
   };
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Choose an account type
+        Create Bank Account
       </Button>
 
       <Modal show={show} onHide={handleClose}>

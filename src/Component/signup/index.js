@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./style.scss";
 import { register } from "../../Redux/Action/userAction";
+import { toast } from "react-toastify";
 
 function Signup() {
+  const [error, setError] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -14,12 +17,16 @@ function Signup() {
       identify_type: formData.get("identify_type"),
       identity_id: formData.get("identity_id"),
     };
+    if (formData.get("password") !== formData.get("confirmPassword")) {
+      setError(true);
+      return;
+    } else setError(false);
     register(data)
       .then((res) => {
-        console.log("res: ", res);
+        if (res.status === 200) toast.success("🦄 Create account successfully");
       })
       .catch((err) => {
-        console.log("err: ", err);
+        toast.error("Fail! Please check again to make sure yore field correct");
       });
   };
   return (
@@ -33,19 +40,31 @@ function Signup() {
           <label for="fullName" class="label">
             Full Name
           </label>
-          <input type="text" id="fullName" name="fullName" class="input" />
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            class="input"
+            required
+          />
         </div>
         <div className="form-input">
           <label for="email" className="label">
             Email
           </label>
-          <input type="email" id="email" name="email" className="input" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="input"
+            required
+          />
         </div>
         <div className="form-input">
           <label for="username" className="label">
             Username
           </label>
-          <input id="username" name="username" className="input" />
+          <input id="username" name="username" className="input" required />
         </div>
         <div className="form-input">
           <label for="identify_type" class="label">
@@ -56,6 +75,7 @@ function Signup() {
             id="identify_type"
             name="identify_type"
             class="input"
+            required
           />
         </div>
         <div className="form-input">
@@ -67,13 +87,20 @@ function Signup() {
             id="identity_id"
             name="identity_id"
             class="input"
+            required
           />
         </div>
         <div className="form-input">
           <label for="password" class="label">
             Password
           </label>
-          <input type="password" id="password" name="password" class="input" />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="input"
+            required
+          />
         </div>
         <div className="form-input">
           <label for="password" class="label">
@@ -84,8 +111,12 @@ function Signup() {
             id="confirmPassword"
             name="confirmPassword"
             class="input"
+            required
           />
         </div>
+        {error && (
+          <p className="error">Confirm password does not match with password</p>
+        )}
         <button type="submit" class="button-type">
           <div className="labelbutton">Create your account</div>
         </button>
