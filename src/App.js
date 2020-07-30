@@ -1,11 +1,11 @@
-import React from "react";
-import "./index.scss";
-import { Homepage } from "./Component";
+import React from 'react';
+import './index.scss';
+import { Homepage, Account, Transaction, Transfer } from './Component';
 
 function App() {
   return (
     <div className="App">
-      <Homepage />
+      <Transfer />
     </div>
   );
 }
