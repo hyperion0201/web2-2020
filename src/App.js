@@ -6,22 +6,22 @@ import { Homepage, Header, Login, Signup, Profile, List_account } from "./Compon
 
 function App() {
   return (
-    // <div>
-    //   <Header />
-    //   <BrowserRouter>
-    //     <Switch>
-    //       <Route path="/login" name="Login" component={Login} />
-    //       <Route path="/register" name="Register" component={Signup} />
-    //       <Route path="/" name="Home" component={Homepage} />
-    //       <Route
-    //         exact
-    //         path="/"
-    //         name="Home"
-    //         render={() => <Redirect to="/login" />}
-    //       />
-    //     </Switch>
-    //   </BrowserRouter>
-    // </div>
+    <div>
+      <Header />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" name="Login" component={Login} />
+          <Route path="/register" name="Register" component={Signup} />
+          <Route path="/" name="Home" component={Homepage} />
+          <Route
+            exact
+            path="/"
+            name="Home"
+            render={() => <Redirect to="/login" />}
+          />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 

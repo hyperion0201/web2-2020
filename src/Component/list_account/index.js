@@ -41,7 +41,7 @@ function List_account() {
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
-                <th>#</th>
+                <th className="order">#</th>
                 <th>Account number</th>
                 <th>Date created</th>
                 <th>Date active</th>
