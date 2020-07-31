@@ -4,7 +4,7 @@ import { getCookie, removeCookie } from "../../helpers/cookie";
 
 function Header() {
   const isLogin = getCookie("user_token");
-  
+
   const handleLogout = () => {
     removeCookie("user_token");
     window.location.reload();
@@ -23,8 +23,16 @@ function Header() {
             </a>
           </div>
         ) : (
-          <div onClick={handleLogout} className="link-btn">
-            Log out
+          <div className="link-group">
+            <a href="#" className="link-btn">
+              List accounts
+            </a>
+            <a href="#" className="link-btn">
+              Profile
+            </a>
+            <a onClick={handleLogout} className="link-btn">
+              Log out
+            </a>
           </div>
         )}
       </div>
