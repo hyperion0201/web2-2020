@@ -1,0 +1,132 @@
+.Login {
+  min-height: calc(100vh - 80px);
+  max-width: 480px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 0px 24px;
+}
+
+.top {
+  height: 10vh;
+  width: 100%;
+  display: block;
+}
+
+.nexttop {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: expo-brand-demi, sans-serif;
+  color: rgba(0, 0, 32, 0.9);
+  font-weight: 600;
+  overflow-wrap: break-word;
+  font-size: 40px;
+  line-height: 100px;
+}
+
+.description {
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: expo-brand-book, sans-serif;
+  color: rgba(0, 0, 32, 0.8);
+  overflow-wrap: break-word;
+  font-size: 17px;
+  line-height: 24px;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+.form-input {
+  margin-bottom: 16px;
+  flex: 1 1 0%;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+.label {
+  margin-bottom: 8px;
+  display: block;
+  box-sizing: border-box;
+  font-family: expo-brand-demi, sans-serif;
+  color: rgba(0, 0, 32, 0.8);
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.input {
+  font-family: expo-brand-book, sans-serif;
+  color: rgba(0, 0, 32, 0.8);
+  font-weight: 500;
+  overflow-wrap: break-word;
+  font-size: 17px;
+  line-height: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 20, 0.016) 0px 2px 2px 0px,
+    rgba(0, 0, 20, 0.008) 0px 0px 0px 1px;
+  position: relative;
+  z-index: 1;
+  padding: 16px 16px 13px;
+  border-radius: 2px;
+  transition: border 200ms ease 0s;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 225);
+  border-image: initial;
+  outline: 0px;
+}
+
+.label-password {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.forgotpassword {
+  color: rgb(70, 48, 235);
+  cursor: pointer;
+  opacity: 1;
+  text-decoration: none;
+  transition: opacity 200ms ease 0s;
+}
+
+.button-type {
+  margin-top: 8px;
+  background-color: rgb(70, 48, 235);
+  font-size: 16px;
+  line-height: 1;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.labelbutton {
+  position: relative;
+  top: 1px;
+  color: rgb(255, 255, 255);
+}
+
+.bottom {
+  font-family: expo-brand-book, sans-serif;
+  color: rgba(0, 0, 32, 0.8);
+  font-weight: 400;
+  overflow-wrap: break-word;
+  font-size: 17px;
+  line-height: 24px;
+  margin-top: 32px;
+  text-align: center;
+  border-top: 1px solid rgb(221, 221, 225);
+  padding: 24px 0px 64px;
+}
+
+.button-create-account {
+  color: #4630eb;
+}

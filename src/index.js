@@ -2,6 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { toast } from "react-toastify";
+toast.configure({
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  position: "bottom-right",
+});
 
 ReactDOM.render(
   <React.StrictMode>
