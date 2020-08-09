@@ -3,7 +3,7 @@
   max-width: 480px;
   width: 100%;
   margin: 0px auto;
-  padding: 0px 24px;
+  padding: 0px 24px 100px;
 }
 
 .top {
@@ -19,7 +19,7 @@
   color: rgba(0, 0, 32, 0.9);
   font-weight: 600;
   overflow-wrap: break-word;
-  font-size: 40px;
+  font-size: 35px;
   line-height: 100px;
 }
 
@@ -98,15 +98,6 @@
   transition: opacity 200ms ease 0s;
 }
 
-.button-type {
-  margin-top: 8px;
-  background-color: rgb(70, 48, 235);
-  font-size: 16px;
-  line-height: 1;
-  height: 40px;
-  border: none;
-  cursor: pointer;
-}
 
 .labelbutton {
   position: relative;
@@ -128,5 +119,5 @@
 }
 
 .button-create-account {
-  color: #4630eb;
+  color: #007bff;
 }
