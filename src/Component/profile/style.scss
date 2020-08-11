@@ -1,7 +1,8 @@
 .profile {
-  background-color: #009ACD;
+  background-color: #b8daff;
   color: white;
   width: 25%;
+  height: calc(100vh - 50px);
 }
 .background {
   background-image: url(/images/background.jpg);
@@ -10,16 +11,15 @@
   background-position: center center;
 }
 
-.pa {
+.text {
   text-align: center;
   padding-top: 1.5rem !important;
   padding-bottom: 0.5rem !important;
 }
 
-.baimfor {
-  text-align: left;
-  .imp {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.profile_btn_logout{
+  &:hover{
+    background: #17a2b8;
   }
+  background-color: #b8daff;
 }

@@ -15,7 +15,7 @@ function Signup() {
       email: formData.get("email"),
       username: formData.get("username"),
       password: formData.get("password"),
-      identify_type: formData.get("identify_type"),
+      identity_type: formData.get("identity_type"),
       identity_id: formData.get("identity_id"),
     };
     if (formData.get("password") !== formData.get("confirmPassword")) {
@@ -68,13 +68,13 @@ function Signup() {
           <input id="username" name="username" className="input" required />
         </div>
         <div className="form-input">
-          <label for="identify_type" class="label">
+          <label for="identity_type" class="label">
             Identify Type
           </label>
           <select
             type="text"
-            id="identify_type"
-            name="identify_type"
+            id="identity_type"
+            name="identity_type"
             class="input"
             required
           >

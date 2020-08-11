@@ -18,3 +18,8 @@ export const login = (data) => {
 export const register = (data) => {
   return request("POST", "register", { data });
 };
+
+export const forgotpassword = (data) => {
+  return request("POST", "user/forgotPassword", { data });
+};
+

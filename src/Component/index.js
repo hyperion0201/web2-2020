@@ -8,5 +8,6 @@ import Change_password from "./change_password"
 import Account from './account';
 import Transaction from './transaction';
 import Transfer from './transfer';
+import ForgotPassword from './ForgotPassword'
 
-export { Homepage, Header, Login, Signup, Profile, List_account, Account, Transaction, Transfer, Change_password };
+export { Homepage, Header, Login, Signup, Profile, List_account, Account, Transaction, Transfer, Change_password, ForgotPassword };
