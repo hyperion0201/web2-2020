@@ -1,7 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import "./style.scss";
+import { Form } from "react-bootstrap";
 
 function Profile() {
+  const [user, setUser] = useState({
+    fullName: "Thanh",
+    email: "asd@sada",
+    username: "dasdsa"
+  })
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('event: ', event);
+    const data = new FormData(event.target);
+    
+  }
   return (
     <div class="container">
       <div class="row my-2">
@@ -9,23 +21,24 @@ function Profile() {
           <h1 className="text-center">Profile</h1>
           <div class="tab-content py-4">
             <div class="tab-pane active" id="edit">
-              <form role="form">
+              <form role="form" onSubmit={handleSubmit}>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">
                     Full name
                   </label>
-                  <div class="col-lg-9"></div>
+                  <input name="fullName" value={user.fullName} onChange={e => setUser({...user, fullName: e.target.value})}></input>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">
                     Email
                   </label>
-                  <div class="col-lg-9"></div>
+                  <input defaultValue={user.email} name="fullName"></input>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">
                     Username
                   </label>
+                  <input defaultValue={user.username} name="fullName"></input>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">
@@ -52,7 +65,7 @@ function Profile() {
                       value="Cancel"
                     />
                     <input
-                      type="button"
+                      type="submit"
                       class="btn btn-primary"
                       value="Change Password"
                     />

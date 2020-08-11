@@ -12,13 +12,15 @@ function App() {
         <Switch>
           <Route path="/login" name="Login" component={Login} />
           <Route path="/register" name="Register" component={Signup} />
-          <Route path="/" name="Home" component={Homepage} />
+          <Route path="/" name="Home" component={Profile} />
           <Route
             exact
             path="/"
             name="Home"
             render={() => <Redirect to="/login" />}
           />
+          <Route path="/profile" name="Profile" component={Profile}/>
+          <Route path="/account" component={List_account}/>
         </Switch>
       </BrowserRouter>
     </div>
