@@ -4,6 +4,7 @@ import Signup from './signup';
 import Header from './Header';
 import Profile from './profile';
 import List_account from './list_account';
+import Change_password from './change_password';
 import Account from './account';
 import Transaction from './transaction';
 import Transfer from './transfer';
@@ -18,4 +19,5 @@ export {
   Account,
   Transaction,
   Transfer,
+  Change_password,
 };

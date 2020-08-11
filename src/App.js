@@ -9,8 +9,8 @@ import {
   Signup,
   Profile,
   List_account,
-  Transfer,
   Transaction,
+  Transfer,
 } from './Component';
 
 function App() {
@@ -28,6 +28,8 @@ function App() {
             name="Home"
             render={() => <Redirect to="/login" />}
           />
+          <Route path="/profile" name="Profile" component={Profile} />
+          <Route path="/account" component={List_account} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -4,6 +4,7 @@ import { login } from "../../Redux/Action/userAction";
 import _ from "lodash";
 import { setCookie } from "../../helpers/cookie";
 import { toast } from "react-toastify";
+import { Button } from "react-bootstrap";
 
 function Login() {
   const handleSubmit = (event) => {
@@ -26,48 +27,51 @@ function Login() {
       });
   };
   return (
-    <div className="Login">
-      <h2 className="nexttop">Welcome back!</h2>
-      <p class="description">
-        Log in to access your dashboard, settings and Snacks.
-      </p>
-      <form onSubmit={handleSubmit} className="form-login">
-        <div className="form-input">
-          <label for="username" className="label">
-            Email or Username
-          </label>
-          <input id="username" name="username" className="input" required />
+    <div className="container homepage">
+      <div className="content">
+        <img src="/images/frame.png" alt="" />
+        <div>
+          <h2 className="nexttop">Welcome back!</h2>
+          <p class="description">Log in to manage your account.</p>
+          <form onSubmit={handleSubmit} className="form-login">
+            <div className="form-input">
+              <label for="username" className="label">
+                Username
+              </label>
+              <input id="username" name="username" className="input" required />
+            </div>
+            <div className="form-input">
+              <label for="password" class="label">
+                <span>
+                  <div className="label-password">
+                    Password
+                    <a className="forgotpassword" href="#">
+                      Forgot password?
+                    </a>
+                  </div>
+                </span>
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="input"
+                required
+              />
+            </div>
+            <Button variant="primary" type="submit">
+              Log in
+            </Button>
+            <p className="bottom">
+              Create account?{" "}
+              <a class="button-create-account" href="/register">
+                Create an account
+              </a>
+              .
+            </p>
+          </form>
         </div>
-        <div className="form-input">
-          <label for="password" class="label">
-            <span>
-              <div className="label-password">
-                Password
-                <a className="forgotpassword" href="#">
-                  Forgot password?
-                </a>
-              </div>
-            </span>
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="input"
-            required
-          />
-        </div>
-        <button type="submit" class="button-type">
-          <div className="labelbutton">Log in</div>
-        </button>
-        <p className="bottom">
-          Create account?{" "}
-          <a class="button-create-account" href="/register">
-            Create an account
-          </a>
-          .
-        </p>
-      </form>
+      </div>
     </div>
   );
 }

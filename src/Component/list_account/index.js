@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 import { Tabs, Tab, Table, ButtonGroup, Button } from "react-bootstrap";
 
-function List_account() {
+function List_account() { 
   return (
     <div className="outermost">
       <h1>List of your bank accounts</h1>
@@ -41,7 +41,7 @@ function List_account() {
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
-                <th>#</th>
+                <th className="order">#</th>
                 <th>Account number</th>
                 <th>Date created</th>
                 <th>Date active</th>
