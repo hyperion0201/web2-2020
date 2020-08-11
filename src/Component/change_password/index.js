@@ -53,14 +53,13 @@ function Change_password() {
           <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <form onSubmit={handleSubmit}>
-          <Modal.Body>
+          <Modal.Body className="change-password-modal">
             <Form.Group>
               <Form.Label>Old Password</Form.Label>
               <Form.Control
                 id="oldPassword"
                 name="oldPassword"
                 type="password"
-                placeholder="Old Password"
               />
             </Form.Group>
             <Form.Group>
@@ -69,14 +68,12 @@ function Change_password() {
                 id="newPassword"
                 name="newPassword"
                 type="password"
-                placeholder="New Password"
               />
             </Form.Group>
             <Form.Group>
               <Form.Label>Confirm New Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Confirm New Password"
                 id="confirmPassword"
                 name="confirmPassword"
               />

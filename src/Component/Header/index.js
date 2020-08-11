@@ -2,13 +2,19 @@ import React from "react";
 import "./style.scss";
 import { getCookie, removeCookie } from "../../helpers/cookie";
 
-function Header() {
+const Header = () => {
   const isLogin = getCookie("user_token");
 
   const handleLogout = () => {
     removeCookie("user_token");
-    window.location.reload();
+    window.location.replace("/");
   };
+
+  const handleShowProfile = () => {
+    let profile = document.getElementById("profileRef");
+      profile && profile.classList.add("show");
+  }
+
   return (
     <div className="header">
       <div className="nav-bar">
@@ -24,15 +30,15 @@ function Header() {
           </div>
         ) : (
           <div className="link-group">
-            <a href="#" className="link-btn">
+            <a href="/account" className="link-btn">
               List accounts
             </a>
-            <a href="/profile" className="link-btn">
+            <span onClick={handleShowProfile} className="link-btn">
               Profile
-            </a>
-            <a onClick={handleLogout} className="link-btn">
+            </span>
+            <span onClick={handleLogout} className="link-btn">
               Log out
-            </a>
+            </span>
           </div>
         )}
       </div>

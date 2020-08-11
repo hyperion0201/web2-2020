@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./style.scss";
 import { ListGroup, Button } from "react-bootstrap";
-import Change_password from "../change_password";
-import { getCookie, removeCookie } from "../../helpers/cookie";
+import ChangePassword from "../change_password";
+import { verifyUser } from "../../Redux/Action/userAction";
 
 function Profile() {
   const [user, setUser] = useState({
@@ -12,13 +12,50 @@ function Profile() {
     identify_id: "123456789",
     status: "unverify",
   });
+  const [fileUpload, setFileUpload] = useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("event: ", event);
     const data = new FormData(event.target);
   };
+  const handleCloseProfile = () => {
+    let profile = document.getElementById("profileRef");
+    profile && profile.classList.remove("show");
+  };
+
+  const onUploadImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const fileSource = fileReader.result;
+      setFileUpload({
+        file: file,
+        fileName: file.name,
+        type: "IMAGE",
+        fileSource,
+      });
+    };
+
+    fileReader.readAsDataURL(file);
+  };
+  const verifyAccount = () => {
+    if (!fileUpload) return;
+    verifyUser({ identify: fileUpload.fileSource })
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  };
   return (
-    <div className="profile">
+    <div id="profileRef" className="profile">
+      <span className="close-btn" onClick={handleCloseProfile}>
+        Close
+      </span>
       <div className="background text">
         <img
           src="/images/user-profile-icons.png"
@@ -40,17 +77,36 @@ function Profile() {
         </ListGroup.Item>
         <ListGroup.Item variant="primary">
           <b>Status</b> : {user.status}
+          {fileUpload && (
+            <img
+              src={fileUpload.fileSource}
+              height={60}
+              width={60}
+              alt={fileUpload.file.name}
+            />
+          )}
+          {fileUpload && (
+            <button className="btn-primary" onClick={verifyAccount}>
+              Verify account
+            </button>
+          )}
           <label class="custom-file">
-            <input type="file" id="file" class="custom-file-input"/>
+            Choose image...
+            <input
+              type="file"
+              accept=".jpeg,.jpg,.png"
+              hidden
+              onChange={onUploadImage}
+            />
           </label>
         </ListGroup.Item>
-        <Change_password />
+        <ChangePassword />
         <ListGroup.Item
           className="profile_btn_logout"
           type="button"
           variant="primary"
         >
-          <img src="/images/logout.svg" height="10%" width="10%"></img>
+          <img src="/images/logout.svg" className="profile-icon" alt=""></img>
           Log out
         </ListGroup.Item>
       </ListGroup>

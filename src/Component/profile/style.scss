@@ -1,8 +1,27 @@
 .profile {
   background-color: #b8daff;
   color: white;
-  width: 25%;
-  height: calc(100vh - 50px);
+  width: 0;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.3s;
+  .profile-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+  }
+}
+.show {
+  width: 400px;
 }
 .background {
   background-image: url(/images/background.jpg);
@@ -17,8 +36,8 @@
   padding-bottom: 0.5rem !important;
 }
 
-.profile_btn_logout{
-  &:hover{
+.profile_btn_logout {
+  &:hover {
     background: #17a2b8;
   }
   background-color: #b8daff;

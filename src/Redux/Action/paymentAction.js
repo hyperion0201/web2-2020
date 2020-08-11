@@ -4,16 +4,15 @@ import { getCookie } from "../../helpers/cookie";
 
 const baseURL = configs.baseUrl;
 
-const request = async (method, url, data) => {
-  console.log(getCookie("user_token"))
+const request = async (method, url, data, heads) => {
+  let headers = { Authorization: `Bearer ${getCookie("user_token")}` };
+  heads && heads.forEach((header) => (headers[header.key] = header.value));
   return axios({
     method,
     url: baseURL + url,
     json: true,
     ...data,
-    headers: {
-      Authorization: `Bearer ${getCookie("user_token")}`,
-    },
+    headers,
   });
 };
 

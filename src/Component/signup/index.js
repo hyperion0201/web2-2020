@@ -3,6 +3,7 @@ import "./style.scss";
 import { register } from "../../Redux/Action/userAction";
 import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
+import { get } from "lodash";
 
 function Signup() {
   const [error, setError] = useState(false);
@@ -22,19 +23,22 @@ function Signup() {
       setError(true);
       return;
     } else setError(false);
-    register(data)
-      .then((res) => {
-        if (res.status === 200) toast.success("🦄 Create account successfully");
-      })
-      .catch((err) => {
-        toast.error("Fail! Please check again to make sure yore field correct");
-      });
+    register(data).then((res) => {
+      if (get(res, "data.error")) toast.error(get(res, "data.error"));
+      else if (res.status === 200) {
+        toast.success("🦄 Create account successfully");
+        window.location.replace("/login");
+      }
+    });
   };
   return (
     <div className="Login">
       <h2 className="nexttop">Create your account</h2>
       <p class="description">
         Create an account to view and manage your bank account.
+      </p>
+      <p>
+        Already has account? <a href="/login">Login</a>
       </p>
       <form onSubmit={handleSubmit} className="form-login">
         <div className="form-input">
@@ -121,7 +125,9 @@ function Signup() {
         {error && (
           <p className="error">Confirm password does not match with password</p>
         )}
-        <Button variant="primary" type="submit">Create your account</Button>
+        <Button variant="primary" type="submit">
+          Create your account
+        </Button>
       </form>
     </div>
   );

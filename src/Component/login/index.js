@@ -5,6 +5,7 @@ import _ from "lodash";
 import { setCookie } from "../../helpers/cookie";
 import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
+import { get } from "lodash";
 
 function Login() {
   const handleSubmit = (event) => {
@@ -22,9 +23,7 @@ function Login() {
           window.location.replace("/");
         }
       })
-      .catch((err) => {
-        toast.error("Email/Username or Password is incorrect");
-      });
+      .catch((err) => toast.error("Email/Username or Password is incorrect"));
   };
   return (
     <div className="container homepage">

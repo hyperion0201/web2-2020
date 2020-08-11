@@ -3,14 +3,15 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 toast.configure({
-  autoClose: 3000,
+  autoClose: 2000,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  position: "bottom-right",
+  position: "top-right",
 });
 
 ReactDOM.render(

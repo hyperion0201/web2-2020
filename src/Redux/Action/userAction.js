@@ -1,13 +1,18 @@
 import axios from "axios";
 import configs from "../../Configs";
+import { getCookie } from "../../helpers/cookie";
 const baseURL = configs.baseUrl;
 
-const request = async (method, url, data) => {
+const request = async (method, url, data, heads) => {
+  let headers = { Authorization: `Bearer ${getCookie("user_token")}` };
+  heads && heads.forEach((header) => (headers[header.key] = header.value));
+  console.log('headers: ', headers);
   return axios({
     method,
     url: baseURL + url,
     json: true,
     ...data,
+    headers,
   });
 };
 
@@ -23,3 +28,11 @@ export const forgotpassword = (data) => {
   return request("POST", "user/forgotPassword", { data });
 };
 
+export const getUserInfo = () => {
+  return request("GET", "user");
+};
+
+export const verifyUser = (data) => {
+  const heads = [{ key: "Content-Type", value: "multipart/formdata" }];
+  return request("POST", "user/verify", { data }, heads);
+};
