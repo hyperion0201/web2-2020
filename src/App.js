@@ -19,8 +19,8 @@ function App() {
             name="Home"
             render={() => <Redirect to="/login" />}
           />
-          <Route path="/profile" name="Profile" component={Profile}/>
-          <Route path="/account" component={List_account}/>
+          <Route path="/profile" name="Profile" component={Profile} />
+          <Route path="/account" component={List_account} />
         </Switch>
       </BrowserRouter>
     </div>

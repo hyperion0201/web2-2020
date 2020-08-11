@@ -1,10 +1,10 @@
-import React from "react";
-import "./style.scss";
-import CreateAccount from "../account";
-import { getCookie } from "../../helpers/cookie";
+import React from 'react';
+import './style.scss';
+import CreateAccount from '../account';
+import { getCookie } from '../../helpers/cookie';
 
 function Homepage() {
-  const isLogin = getCookie("user_token");
+  const isLogin = getCookie('user_token');
   return (
     <div className="container homepage">
       <div className="content">
