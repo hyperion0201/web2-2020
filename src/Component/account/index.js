@@ -53,7 +53,7 @@ function Account() {
               Close
             </Button>
             <Button variant="primary" type="submit">
-              Submit
+              Create
             </Button>
           </Modal.Footer>
         </form>

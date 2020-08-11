@@ -1,0 +1,25 @@
+.profile {
+  background-color: #009ACD;
+  color: white;
+  width: 25%;
+}
+.background {
+  background-image: url(/images/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.pa {
+  text-align: center;
+  padding-top: 1.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.baimfor {
+  text-align: left;
+  .imp {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

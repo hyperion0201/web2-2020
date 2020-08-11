@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import { register } from "../../Redux/Action/userAction";
 import { toast } from "react-toastify";
+import { Button } from "react-bootstrap";
 
 function Signup() {
   const [error, setError] = useState(false);
@@ -70,13 +71,16 @@ function Signup() {
           <label for="identify_type" class="label">
             Identify Type
           </label>
-          <input
+          <select
             type="text"
             id="identify_type"
             name="identify_type"
             class="input"
             required
-          />
+          >
+            <option value="cmnd">Chứng minh nhân dân.</option>
+            <option value="cccd">Căn cước công dân</option>
+          </select>
         </div>
         <div className="form-input">
           <label for="identity_id" class="label">
@@ -117,9 +121,7 @@ function Signup() {
         {error && (
           <p className="error">Confirm password does not match with password</p>
         )}
-        <button type="submit" class="button-type">
-          <div className="labelbutton">Create your account</div>
-        </button>
+        <Button variant="primary" type="submit">Create your account</Button>
       </form>
     </div>
   );
