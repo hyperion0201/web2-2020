@@ -27,7 +27,7 @@ function Account() {
       .then((res) => {
         if (res.status === 200) {
           handleClose();
-          toast.success("🦄 Create bank account successfully!");
+          toast.success("Create bank account successfully!");
         }
       })
       .catch((err) => {
@@ -76,7 +76,7 @@ function Account() {
               className="my-1 mr-2 text-center"
               htmlFor="inlineFormCustomSelectPref"
             >
-              Currency
+              <b>Currency</b>
             </Form.Label>
             <Form.Control
               as="select"

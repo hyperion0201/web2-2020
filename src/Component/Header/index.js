@@ -12,7 +12,7 @@ const Header = () => {
 
   const handleShowProfile = () => {
     let profile = document.getElementById("profileRef");
-      profile && profile.classList.add("show");
+      profile && profile.classList.add("showProfile");
   }
 
   return (
