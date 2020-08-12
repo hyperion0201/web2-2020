@@ -42,7 +42,7 @@ function Transaction() {
     <div className="transaction">
       <h2>TRANSACTION HISTORY</h2>
       <Table responsive striped bordered>
-        <thead className="header">
+        <thead className="header-tab">
           <tr>
             <th>No</th>
             <th>Account Number</th>

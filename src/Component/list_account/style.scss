@@ -1,6 +1,8 @@
 .outermost{
   padding: 2% 2%;
   text-align: center;
+  padding-top: 100px;
+
 }
 .table {
   text-align: center;
@@ -29,4 +31,8 @@
 .tab-table{
   margin:0 auto;
   width: auto;
+}
+.btn-close-form{
+ text-align: right;
+ cursor: pointer;
 }

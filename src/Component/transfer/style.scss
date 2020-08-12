@@ -1,16 +1,18 @@
 .transfer-body {
-  background-color: #192637;
   color: white;
   max-width: 600px;
-  padding: 35px 0;
   margin: auto;
+  padding: 30px 0;
+  background-color: #192637;
 
   .transfer-h1 {
     margin-top: 10px;
     text-align: center;
     font-family: monospace;
+
   }
   .transfer-head {
+    background-color: #192637;
     max-width: 500px;
     width: 100%;
     margin: auto;
@@ -49,4 +51,7 @@
     color: red;
     margin-top: 5px;
   }
+}
+.transfer-padding{
+  padding-top: 100px;
 }
