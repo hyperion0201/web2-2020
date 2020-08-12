@@ -35,3 +35,8 @@ export const verifyUser = (data) => {
   const heads = [{ key: "Content-Type", value: "multipart/formdata" }];
   return request("POST", "user/verify", { data }, heads);
 };
+
+//redux action
+export const setUserInfo = async () => {
+  const info = await getUserInfo();
+}
