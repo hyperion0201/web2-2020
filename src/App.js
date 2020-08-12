@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { isLogin } from "./helpers/cookie";

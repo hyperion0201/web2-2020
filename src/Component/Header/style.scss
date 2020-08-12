@@ -1,9 +1,12 @@
 .header {
-  position: relative;
-  padding: 15px 0;
+  position: fixed;
+  padding: 25px 0;
   width: 100%;
-  background: white;
-  border-bottom: 1px solid #ddd6d6;
+  background: transparent;
+  color: white;
+  .header-nav {
+    padding: 0 30px;
+  }
   p {
     margin: 0;
   }
@@ -11,13 +14,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
     font-weight: 600;
+    max-width: 1200px;
     a + a {
       margin-left: 15px;
     }
     .link-btn {
-      color: black;
+      color: white;
       text-decoration: none;
       padding: 10px 15px;
       cursor: pointer;

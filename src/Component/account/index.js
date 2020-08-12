@@ -36,9 +36,9 @@ function Account() {
       });
   };
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Create Bank Account
+    <div>
+      <Button variant="primary" className="order-btn" onClick={handleShow}>
+        Create Card
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -99,7 +99,7 @@ function Account() {
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </div>
   );
 }
 

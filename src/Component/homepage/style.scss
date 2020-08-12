@@ -1,8 +1,68 @@
 .homepage {
-  padding: 50px 0;
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  .main-outer {
+    width: 100%;
+    background-image: url("/images/img1.jpg");
+    background-size: cover;
+    color: white;
+    .main-insider {
+      padding: 150px 0;
+    }
+    h3 {
+      font-size: 70px;
+      line-height: 1.14286;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      font-weight: 200;
+    }
+    .order-group {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      .order-btn {
+        background: linear-gradient(347.96deg, #0085ff 0%, #68ccf3 100%);
+        padding: 10px 30px;
+        border-radius: 20px;
+        border: none;
+        color: white;
+        font-weight: 600;
+        margin-top: 30px;
+      }
+    }
   }
+  .about-bank {
+    padding-top: 100px;
+    margin: auto;
+    text-align: center;
+    h5 {
+      font-size: 48px;
+      font-weight: 300;
+    }
+    .subtitle {
+      color: #29293a;
+      font-size: 14px;
+      max-width: 700px;
+      margin: 25px auto;
+    }
+    .info {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 70px;
+      .img {
+        border-radius: 10px;
+      }
+      .description {
+        font-size: 14px;
+        color: #29293a;
+        text-align: left;
+      }
+      .info-item {
+        flex-basis: 40%;
+      }
+    }
+  }
+}
+.my-container {
+  max-width: 1200px;
 }

@@ -39,7 +39,7 @@ function Transaction() {
     },
   ];
   return (
-    <div>
+    <div className="transaction">
       <h2>TRANSACTION HISTORY</h2>
       <Table responsive striped bordered>
         <thead className="header">
