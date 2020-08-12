@@ -1,42 +1,52 @@
-.transfer-h1 {
-  text-align: center;
-  font-family: monospace;
-}
-.transfer-head {
-  max-width: 500px;
-  margin: auto;
-  color: black;
-  hr {
-    background-color: white;
-  }
-}
 .transfer-body {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-  label {
-    margin-top: 10px;
-    font-family: monospace;
-    font-size: large;
-  }
-  input,
-  textarea {
-    border-radius: 5px;
-  }
-}
-.transfer-submit {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 20px;
-  input {
-    width: 100%;
-    border-radius: 5px;
-    background-color: #17a2b8;
-    color: white;
-  }
-}
+  background-color: #192637;
+  color: white;
+  max-width: 600px;
+  padding: 35px 0;
+  margin: auto;
 
-.transfer-error {
-  color: red;
-  margin-top: 5px;
+  .transfer-h1 {
+    margin-top: 10px;
+    text-align: center;
+    font-family: monospace;
+  }
+  .transfer-head {
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    hr {
+      background-color: white;
+    }
+  }
+  .transfer-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    label {
+      margin-top: 10px;
+      font-family: monospace;
+      font-size: large;
+    }
+    input,
+    textarea {
+      border-radius: 5px;
+    }
+  }
+  .transfer-submit {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    input {
+      width: 100%;
+      border-radius: 5px;
+      background-color: #17a2b8;
+      color: white;
+    }
+  }
+  .transfer-error {
+    color: red;
+    margin-top: 5px;
+  }
 }
