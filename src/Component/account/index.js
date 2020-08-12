@@ -27,7 +27,7 @@ function Account() {
       .then((res) => {
         if (res.status === 200) {
           handleClose();
-          toast.success("🦄 Create bank account successfully!");
+          toast.success("Create bank account successfully!");
         }
       })
       .catch((err) => {
@@ -36,9 +36,9 @@ function Account() {
       });
   };
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Create Bank Account
+    <div>
+      <Button variant="primary" className="order-btn" onClick={handleShow}>
+        Create Card
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -76,7 +76,7 @@ function Account() {
               className="my-1 mr-2 text-center"
               htmlFor="inlineFormCustomSelectPref"
             >
-              Currency
+              <b>Currency</b>
             </Form.Label>
             <Form.Control
               as="select"
@@ -99,7 +99,7 @@ function Account() {
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </div>
   );
 }
 

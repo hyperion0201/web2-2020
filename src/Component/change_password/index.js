@@ -41,7 +41,6 @@ function Change_password() {
       <ListGroup.Item
         className="btn_changepassword"
         type="button"
-        variant="primary"
         onClick={handleShow}
       >
         <img src="/images/changepassword.svg" height="10%" width="10%"></img>

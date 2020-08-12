@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { ListGroup, Button } from "react-bootstrap";
 import ChangePassword from "../change_password";
-import { verifyUser } from "../../Redux/Action/userAction";
+import { verifyUser, getUserInfo } from "../../Redux/Action/userAction";
 
 function Profile() {
   const [user, setUser] = useState({
-    fullName: "Thanh",
-    email: "asd@sada",
-    username: "danbalacaithuboibac",
-    identify_id: "123456789",
-    status: "unverify",
+    id: null,
+    username: "",
+    email: "",
+    fullName: "",
+    password: "",
+    status: "",
+    identity_type: "",
+    identity_id: "",
+    identity_image_url: null,
+    role: "",
+    createdAt: "",
+    updatedAt: "",
   });
+
+  useEffect(() => {
+    getUserInfo()
+      .then((res) => {
+        const persons = res.data;
+        setUser(persons.user);
+        console.log('persons: ', persons);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  }, []);
+  console.log('user: ', user);
+
   const [fileUpload, setFileUpload] = useState(null);
 
   const handleSubmit = (event) => {
@@ -53,9 +74,9 @@ function Profile() {
   };
   return (
     <div id="profileRef" className="profile">
-      <span className="close-btn" onClick={handleCloseProfile}>
+      <button className="close" onClick={handleCloseProfile}>
         Close
-      </span>
+      </button>
       <div className="background text">
         <img
           src="/images/user-profile-icons.png"
@@ -65,17 +86,17 @@ function Profile() {
         ></img>
         <h3>{user.username}</h3>
       </div>
-      <ListGroup>
-        <ListGroup.Item variant="primary">
+      <ListGroup className="bg-c">
+        <ListGroup.Item className="bg-c">
           <b>Full name</b> : {user.fullName}
         </ListGroup.Item>
-        <ListGroup.Item variant="primary">
+        <ListGroup.Item className="bg-c">
           <b>Email</b> : {user.email}
         </ListGroup.Item>
-        <ListGroup.Item variant="primary">
-          <b>Identify ID</b> : {user.identify_id}
+        <ListGroup.Item className="bg-c">
+          <b>Identify ID</b> : {user.identity_id}
         </ListGroup.Item>
-        <ListGroup.Item variant="primary">
+        <ListGroup.Item className="bg-c">
           <b>Status</b> : {user.status}
           {fileUpload && (
             <img
@@ -101,11 +122,7 @@ function Profile() {
           </label>
         </ListGroup.Item>
         <ChangePassword />
-        <ListGroup.Item
-          className="profile_btn_logout"
-          type="button"
-          variant="primary"
-        >
+        <ListGroup.Item className="profile_btn_logout" type="button">
           <img src="/images/logout.svg" className="profile-icon" alt=""></img>
           Log out
         </ListGroup.Item>

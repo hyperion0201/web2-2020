@@ -21,6 +21,16 @@
   margin: auto !important;
 }
 
-.mr-sm-2{
+.btn-primary.focus {
+  background-color: #192637;
+}
+.btn-primary {
+  &:hover {
+    background: #192637;
+  }
+}
+
+.mr-sm-2 {
   width: 25%;
+  font-weight: bold;
 }

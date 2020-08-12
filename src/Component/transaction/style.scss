@@ -1,23 +1,25 @@
-.header {
-  font-family: monospace;
-  font-size: medium;
-  align-items: center;
-  color: black;
-  th {
-    text-align: center;
+.transaction {
+  .header {
+    font-family: monospace;
+    font-size: medium;
+    align-items: center;
+    color: black;
+    th {
+      text-align: center;
+    }
   }
-}
-.body {
-  background-color: white;
-  font-family: monospace;
-  font-size: medium;
-  align-items: center;
-  font-weight: initial;
-  th {
-    text-align: center;
+  .body {
+    background-color: white;
+    font-family: monospace;
+    font-size: medium;
+    align-items: center;
+    font-weight: initial;
+    th {
+      text-align: center;
+    }
   }
-}
-h2 {
-  text-align: center;
-  margin: 10px auto;
+  h2 {
+    text-align: center;
+    margin: 10px auto;
+  }
 }
