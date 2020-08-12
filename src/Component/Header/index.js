@@ -12,7 +12,7 @@ const Header = () => {
 
   const handleShowProfile = () => {
     let profile = document.getElementById("profileRef");
-      profile && profile.classList.add("show");
+      profile && profile.classList.add("show-profile");
   }
 
   return (
@@ -38,6 +38,9 @@ const Header = () => {
             </a>
             <a href="/transfer" className="link-btn">
               Transfer
+            </a>
+            <a href="/user-management" className="link-btn">
+              User Management
             </a>
             <span onClick={handleShowProfile} className="link-btn">
               Profile

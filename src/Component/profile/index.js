@@ -21,7 +21,7 @@ function Profile() {
   };
   const handleCloseProfile = () => {
     let profile = document.getElementById("profileRef");
-    profile && profile.classList.remove("show");
+    profile && profile.classList.remove("show-profile");
   };
 
   const onUploadImage = (e) => {

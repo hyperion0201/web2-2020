@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import "./index.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { isLogin } from "./helpers/cookie";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React, { Component } from 'react';
+import './index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { isLogin } from './helpers/cookie';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {
   Homepage,
   Header,
@@ -13,10 +13,10 @@ import {
   Transaction,
   Transfer,
   ForgotPassword,
-} from "./Component";
+  User_Management,
+} from './Component';
 
 function App() {
-  
   return (
     <div>
       <BrowserRouter>
@@ -39,6 +39,7 @@ function App() {
           <PrivateRoute path="/transaction" exact component={Transaction} />
           <PrivateRoute path="/transfer" exact component={Transfer} />
           <PrivateRoute path="/account" exact component={List_account} />
+          <PrivateRoute path="/user-management" exact component={User_Management} />
           <Route path="*">
             <div className="page-404">
               <img src="/images/frame.png" alt="" />

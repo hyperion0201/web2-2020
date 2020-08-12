@@ -9,5 +9,6 @@ import Account from './account';
 import Transaction from './transaction';
 import Transfer from './transfer';
 import ForgotPassword from './ForgotPassword'
+import User_Management from './user_management'
 
-export { Homepage, Header, Login, Signup, Profile, List_account, Account, Transaction, Transfer, Change_password, ForgotPassword };
+export { Homepage, Header, Login, Signup, Profile, List_account, Account, Transaction, Transfer, Change_password, ForgotPassword, User_Management };
