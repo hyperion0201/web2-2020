@@ -74,7 +74,7 @@ const FinancialStatistics = () => {
             </p>
             <div className="ceo">
               <p className="author">Minh Hieu Hoang</p>
-              <p className="position">CEO & Founder of Bank Progress</p>
+              <p className="position">CEO & Founder of VNBC Bank</p>
             </div>
           </div>
           <div className="item">
