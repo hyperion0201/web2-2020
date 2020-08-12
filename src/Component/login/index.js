@@ -26,10 +26,10 @@ function Login() {
       .catch((err) => toast.error("Email/Username or Password is incorrect"));
   };
   return (
-    <div className="container homepage">
+    <div className="container homepage login-page">
       <div className="content">
-        <img src="/images/frame.png" alt="" />
-        <div>
+        <img className="item img" src="/images/frame.png" alt="" />
+        <div className="item">
           <h2 className="nexttop">Welcome back!</h2>
           <p class="description">Log in to manage your account.</p>
           <form onSubmit={handleSubmit} className="form-login">

@@ -4,6 +4,7 @@
   width: 100%;
   background: #192637;
   color: white;
+  z-index: 100;
   .header-nav {
     padding: 0 30px;
   }
@@ -17,6 +18,9 @@
     font-weight: 600;
     max-width: 1200px;
     margin: auto;
+    .logo {
+      cursor: pointer;
+    }
     a + a {
       margin-left: 15px;
     }

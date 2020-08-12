@@ -121,3 +121,18 @@
 .button-create-account {
   color: #007bff;
 }
+
+.login-page {
+  padding-top: 150px;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .item {
+      flex-basis: 40%;
+    }
+    .img {
+      height: fit-content;
+    }
+  }
+}
