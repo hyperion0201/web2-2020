@@ -33,6 +33,12 @@ const Header = () => {
             <a href="/account" className="link-btn">
               List accounts
             </a>
+            <a href="/transaction" className="link-btn">
+              Transaction
+            </a>
+            <a href="/transfer" className="link-btn">
+              Transfer
+            </a>
             <span onClick={handleShowProfile} className="link-btn">
               Profile
             </span>

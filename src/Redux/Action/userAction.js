@@ -6,7 +6,6 @@ const baseURL = configs.baseUrl;
 const request = async (method, url, data, heads) => {
   let headers = { Authorization: `Bearer ${getCookie("user_token")}` };
   heads && heads.forEach((header) => (headers[header.key] = header.value));
-  console.log('headers: ', headers);
   return axios({
     method,
     url: baseURL + url,

@@ -12,11 +12,9 @@ import {
   Transaction,
   Transfer,
   ForgotPassword,
-  Change_password,
 } from "./Component";
 
 function App() {
-
   return (
     <div>
       <BrowserRouter>
@@ -28,6 +26,9 @@ function App() {
           <Route path="/" exact name="Home" component={Homepage} />
           <Route exact path="/" name="Home" />
           <Route path="/account" exact component={List_account} />
+          <Route path="/forgot-password" exact component={ForgotPassword} />
+          <Route path="/transaction" exact component={Transaction} />
+          <Route path="/transfer" exact component={Transfer} />
         </Switch>
       </BrowserRouter>
     </div>

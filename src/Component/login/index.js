@@ -44,7 +44,7 @@ function Login() {
                 <span>
                   <div className="label-password">
                     Password
-                    <a className="forgotpassword" href="#">
+                    <a className="forgotpassword" href="/forgot-password">
                       Forgot password?
                     </a>
                   </div>
