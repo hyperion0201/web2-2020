@@ -2,7 +2,7 @@
   position: fixed;
   padding: 25px 0;
   width: 100%;
-  background: transparent;
+  background: #192637;
   color: white;
   .header-nav {
     padding: 0 30px;
@@ -16,6 +16,7 @@
     align-items: center;
     font-weight: 600;
     max-width: 1200px;
+    margin: auto;
     a + a {
       margin-left: 15px;
     }
@@ -26,6 +27,7 @@
       cursor: pointer;
       &:hover {
         background: #f4f4f4;
+        color: #192637;
       }
     }
     .sign-up {

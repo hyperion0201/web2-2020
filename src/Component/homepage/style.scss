@@ -46,11 +46,12 @@
     }
     .info {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       margin-top: 70px;
       .img {
         border-radius: 10px;
+        max-width: 100%;
       }
       .description {
         font-size: 14px;
@@ -62,7 +63,92 @@
       }
     }
   }
+  .financial {
+    background: #192637;
+    padding: 100px 0;
+    color: white;
+    margin-top: 150px;
+    .statistic {
+      h4 {
+        font-size: 48px;
+        margin-bottom: 50px;
+        font-weight: 300;
+        text-align: center;
+      }
+      .info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .content {
+          .ceo {
+            float: right;
+          }
+          .author {
+            color: #1e90ff;
+            margin-bottom: 0;
+          }
+          .position {
+            font-style: italic;
+            color: #cccccc;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+        .item {
+          flex-basis: 45%;
+          max-width: 450px;
+          .img {
+            max-height: 300px;
+          }
+        }
+      }
+    }
+  }
+  .optional {
+    margin-top: 150px;
+    .title {
+      font-size: 48px;
+      font-weight: 300;
+      text-align: center;
+    }
+    .description {
+      font-weight: 300;
+      color: #29293a;
+      font-size: 14px;
+      max-width: 740px;
+      text-align: center;
+      margin: auto;
+      margin-top: 30px;
+    }
+    .list-option {
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .option {
+        text-align: center;
+        margin: 10px 20px;
+        max-width: 300px;
+        .icon {
+          color: #1E90FF;
+          font-size: 60px;
+        }
+        .item-title {
+          color: #29293a;
+          font-weight: 400;
+          margin-top: 12px;
+        }
+        .item-description {
+          color: #828590;
+          font-size: 14px;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+        }
+      }
+    }
+  }
 }
 .my-container {
   max-width: 1200px;
+  margin: auto;
 }
