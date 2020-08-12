@@ -12,6 +12,7 @@ function Transfer() {
   };
 
   return (
+    <div className="transfer-padding">
     <div className="transfer-body">
       <form className="transfer-head" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="transfer-h1">VNBC TRANSFER MONEY</h1>
@@ -54,6 +55,7 @@ function Transfer() {
           <input type="submit" value="S U B M I T" />
         </div>
       </form>
+    </div>
     </div>
   );
 }

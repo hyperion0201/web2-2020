@@ -1,20 +1,39 @@
-.body-management{
-    padding: 2% 2%;
+
+.body-management {
+  padding: 2% 2%;
 }
-hr{
-    width: 50%;
+hr {
+  width: 50%;
 }
-h2{
-    margin-bottom: 20px;
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
 }
-.form-label{
-    text-align: left;
-    flex:0 0 29%;
-    max-width: 29%;
+.form-label {
+  text-align: left;
+  flex: 0 0 29%;
+  max-width: 29%;
 }
-.padding-label{
-    padding-left: 35px;
+
+.padding-label {
+  padding-left: 35px;
 }
-.btn-close{
-    width: 124px;
+.btn-close {
+  width: 124px;
 }
+.management-padding {
+  padding-top: 100px;
+}
+.btn-close {
+  margin: 5px;
+  width: 100px;
+}
+.btn-account{
+    width: 120px;
+  }
+.modal-account{
+  .modal-content{
+    min-width: 800px;
+  }
+}
+
