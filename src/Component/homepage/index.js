@@ -89,32 +89,32 @@ const FinancialStatistics = () => {
 const Optional = () => {
   const listOption = [
     {
-      icon: "aaa",
+      icon: "location_city",
       title: "Various Locations",
       description: "We have offices in many countries including the USA and the UK."
     },
     {
-      icon: "aaa",
+      icon: "phone_android",
       title: "Mobile Banking Apps",
       description: "Get instant access to your account on any device using our banking apps."
     },
     {
-      icon: "aaa",
+      icon: "person_pin",
       title: "Family & Friends Programs",
       description: "Our Bank has special programs with benefits for family members."
     },
     {
-      icon: "aaa",
+      icon: "perm_phone_msg",
       title: "24/7 Support",
       description: "Our Support team is always ready to help you solve any banking issues."
     },
     {
-      icon: "aaa",
+      icon: "event_note",
       title: "Personal Profile",
       description: "Register your free personal profile online to begin using our services."
     },
     {
-      icon: "aaa",
+      icon: "settings",
       title: "Settings",
       description: "Registered clients can edit the banking account settings in 2 clicks."
     },
@@ -131,9 +131,9 @@ const Optional = () => {
       <div className="list-option">
       {listOption.map(item => (
         <div key={item.title} className="option">
-          <div className="icon"></div>
-          <p className="title">{item.title}</p>
-          <p className="description">{item.description}</p>
+          <i class="material-icons icon">{item.icon}</i>
+          <p className="item-title">{item.title}</p>
+          <p className="item-description">{item.description}</p>
         </div>
       ))}
       </div>

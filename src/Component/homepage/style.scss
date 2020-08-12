@@ -125,21 +125,20 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .item {
+      .option {
         text-align: center;
-        margin: 0 20px;
+        margin: 10px 20px;
         max-width: 300px;
         .icon {
-          &::before {
-
-          }
+          color: #1E90FF;
+          font-size: 60px;
         }
-        .title {
+        .item-title {
           color: #29293a;
           font-weight: 400;
           margin-top: 12px;
         }
-        .description {
+        .item-description {
           color: #828590;
           font-size: 14px;
           font-weight: 300;
