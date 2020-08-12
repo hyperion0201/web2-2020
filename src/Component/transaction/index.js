@@ -39,32 +39,35 @@ function Transaction() {
     },
   ];
   return (
-    <Table responsive striped bordered>
-      <thead className="header">
-        <tr>
-          <th>No</th>
-          <th>Account Number</th>
-          <th> Amount Of Money (+) </th>
-          <th> Amount Of Money (-) </th>
-          <th>Transaction Time </th>
-          <th>From (To) Account</th>
-          <th>From (To) Bank </th>
-        </tr>
-      </thead>
-      {trans.map((tran) => (
-        <tbody className="body">
+    <div>
+      <h2>TRANSACTION HISTORY</h2>
+      <Table responsive striped bordered>
+        <thead className="header">
           <tr>
-            <th>{tran.id}</th>
-            <th>{tran.accountNo}</th>
-            <th>{tran.moneyInto}</th>
-            <th>{tran.moneyOut}</th>
-            <th>{tran.time}</th>
-            <th>{tran.guestAccount}</th>
-            <th>{tran.guestBank}</th>
+            <th>No</th>
+            <th>Account Number</th>
+            <th> Amount Of Money (+) </th>
+            <th> Amount Of Money (-) </th>
+            <th>Transaction Time </th>
+            <th>From (To) Account</th>
+            <th>From (To) Bank </th>
           </tr>
-        </tbody>
-      ))}
-    </Table>
+        </thead>
+        {trans.map((tran) => (
+          <tbody className="body">
+            <tr>
+              <th>{tran.id}</th>
+              <th>{tran.accountNo}</th>
+              <th>{tran.moneyInto}</th>
+              <th>{tran.moneyOut}</th>
+              <th>{tran.time}</th>
+              <th>{tran.guestAccount}</th>
+              <th>{tran.guestBank}</th>
+            </tr>
+          </tbody>
+        ))}
+      </Table>
+    </div>
   );
 }
 export default Transaction;
