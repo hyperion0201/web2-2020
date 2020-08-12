@@ -36,7 +36,11 @@ export const verifyUser = (data) => {
   return request("POST", "user/verify", { data }, heads);
 };
 
+export const getListAccount = () => {
+  return request("GET", "account");
+};
+
 //redux action
 export const setUserInfo = async () => {
   const info = await getUserInfo();
-}
+};
