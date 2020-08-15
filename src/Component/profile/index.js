@@ -25,13 +25,13 @@ function Profile() {
       .then((res) => {
         const persons = res.data;
         setUser(persons.user);
-        console.log('persons: ', persons);
+        // console.log('persons: ', persons);
       })
       .catch((err) => {
         console.log("err: ", err);
       });
   }, []);
-  console.log('user: ', user);
+  // console.log('user: ', user);
 
   const [fileUpload, setFileUpload] = useState(null);
 

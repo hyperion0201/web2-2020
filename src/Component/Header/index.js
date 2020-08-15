@@ -19,7 +19,12 @@ const Header = () => {
     <div className="header">
       <div className="header-nav">
         <div className="nav-bar">
-          <p className="logo" onClick={() => window.location.replace("/")}>VNBC Bank</p>
+          <img
+            className="logo"
+            onClick={() => window.location.replace("/")}
+            src="/images/logo.png"
+            alt=""
+          />
           {!isLogin ? (
             <div className="link-group">
               <a href="/login" className="link-btn">
@@ -33,9 +38,6 @@ const Header = () => {
             <div className="link-group">
               <a href="/account" className="link-btn">
                 List accounts
-              </a>
-              <a href="/transaction" className="link-btn">
-                Transaction
               </a>
               <a href="/transfer" className="link-btn">
                 Transfer

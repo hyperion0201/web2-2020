@@ -9,7 +9,6 @@
     margin-top: 10px;
     text-align: center;
     font-family: monospace;
-
   }
   .transfer-head {
     background-color: #192637;
@@ -24,6 +23,18 @@
     display: flex;
     flex-direction: column;
     min-width: 300px;
+    .input-field {
+      height: 40px;
+      border: none;
+      border-radius: 5px;
+    }
+    .number-none-arrow {
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
     label {
       margin-top: 10px;
       font-family: monospace;
@@ -45,6 +56,7 @@
       border-radius: 5px;
       background-color: #17a2b8;
       color: white;
+      border: none;
     }
   }
   .transfer-error {
@@ -52,6 +64,6 @@
     margin-top: 5px;
   }
 }
-.transfer-padding{
+.transfer-padding {
   padding-top: 100px;
 }

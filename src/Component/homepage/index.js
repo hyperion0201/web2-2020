@@ -14,11 +14,8 @@ function Homepage() {
 }
 
 const MainOuter = () => {
-  // const socialList = [{ title: "" }];
   return (
     <div className="main-outer">
-      {/* <div className="social-list">
-      </div> */}
       <div className="main-insider">
         <h3>The Fastest Way to Send Money Worldwide</h3>
         <div className="order-group">

@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
-import { Tabs, Tab, Table, Button } from "react-bootstrap";
+import { Tabs, Tab, Table, Button, Modal } from "react-bootstrap";
 import { getListAccount } from "../../Redux/Action/userAction";
+import { get } from "lodash";
+import TransactionHistory from "../transaction";
 
 function List_account({ isModal, handleClose }) {
   const [accounts, setAccounts] = useState([]);
+  const [showTransHistory, setShowTransHistory] = useState(false);
+  const [accountSelected, setAccountSelected] = useState();
 
   useEffect(() => {
-    getListAccount()
-      .then((res) => {
-        const listAccount = res.data;
-        setAccounts(listAccount.accounts);
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-      });
+    getListAccount().then((res) => {
+      if (res.error) return;
+      const { data } = res;
+      setAccounts(get(data, "accounts"));
+    });
   }, []);
+
+  const handleShowTransHistory = (account) => {
+    setShowTransHistory(true);
+    setAccountSelected(account);
+  };
   return (
     <div className="btn-close-form">
       {isModal && (
@@ -23,6 +29,13 @@ function List_account({ isModal, handleClose }) {
           close
         </i>
       )}
+      <Modal
+        show={showTransHistory}
+        onHide={() => setShowTransHistory(false)}
+        size="xl"
+      >
+        <TransactionHistory accountSelected={accountSelected} />
+      </Modal>
       <div className="outermost">
         <h1>List of your bank accounts</h1>
         <Tabs>
@@ -51,7 +64,10 @@ function List_account({ isModal, handleClose }) {
                       <td>{account.account_id}</td>
                       <td>{account.account_balance}</td>
                       <td>
-                        <Button variant="primary">
+                        <Button
+                          variant="primary"
+                          onClick={() => handleShowTransHistory(account)}
+                        >
                           View transaction history
                         </Button>
                       </td>

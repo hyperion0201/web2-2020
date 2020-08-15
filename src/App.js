@@ -10,7 +10,6 @@ import {
   Signup,
   Profile,
   List_account,
-  Transaction,
   Transfer,
   ForgotPassword,
   User_Management,
@@ -36,7 +35,6 @@ function App() {
             component={ForgotPassword}
           />
           <PrivateRoute path="/" exact name="Home" component={Homepage} />
-          <PrivateRoute path="/transaction" exact component={Transaction} />
           <PrivateRoute path="/transfer" exact component={Transfer} />
           <PrivateRoute path="/account" exact component={List_account} />
           <PrivateRoute path="/user-management" exact component={User_Management} />

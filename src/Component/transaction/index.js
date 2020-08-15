@@ -1,41 +1,55 @@
-import React from 'react';
-import './style.scss';
-import { Table } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import "./style.scss";
+import { Table } from "react-bootstrap";
+import { getListTransaction } from "../../Redux/Action/paymentAction";
+import { get } from "lodash";
 
-function Transaction() {
+function Transaction({ accountSelected }) {
+  const [listTransaction, setListTransaction] = useState([]);
+
+  useEffect(() => {
+    if (accountSelected) {
+      getListTransaction(accountSelected.account_id).then((res) => {
+        if (res.status === 200) {
+          setListTransaction(get(res, "data.data"));
+        }
+      });
+    }
+  }, [accountSelected]);
+
   const today = new Date();
   const date =
-    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   const time =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  const dateTime = date + ' ' + time;
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const dateTime = date + " " + time;
   const trans = [
     {
-      id: '001',
+      id: "001",
       accountNo: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      moneyInto: 500 + '$',
-      moneyOut: 0 + '$',
+      moneyInto: 500 + "$",
+      moneyOut: 0 + "$",
       time: dateTime,
       guestAccount: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      guestBank: 'TranDan Bank',
+      guestBank: "TranDan Bank",
     },
     {
-      id: '002',
+      id: "002",
       accountNo: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      moneyInto: 0 + '$',
-      moneyOut: 200 + '$',
+      moneyInto: 0 + "$",
+      moneyOut: 200 + "$",
       time: dateTime,
       guestAccount: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      guestBank: 'TranDan Bank',
+      guestBank: "TranDan Bank",
     },
     {
-      id: '003',
+      id: "003",
       accountNo: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      moneyInto: 1000 + '$',
-      moneyOut: 0 + '$',
+      moneyInto: 1000 + "$",
+      moneyOut: 0 + "$",
       time: dateTime,
       guestAccount: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      guestBank: 'TranDan Bank',
+      guestBank: "TranDan Bank",
     },
   ];
   return (
