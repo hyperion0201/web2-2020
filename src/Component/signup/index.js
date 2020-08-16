@@ -2,7 +2,19 @@ import React, { useState } from "react";
 import "./style.scss";
 import { register } from "../../Redux/Action/userAction";
 import { toast } from "react-toastify";
-import { Button } from "react-bootstrap";
+import {
+  Select,
+  MenuItem,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Typography,
+  Container,
+  FormControl,
+  InputLabel
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { get } from "lodash";
 
 function Signup() {
@@ -32,103 +44,118 @@ function Signup() {
     });
   };
   return (
-    <div className="Login">
-      <h2 className="nexttop">Create your account</h2>
-      <p class="description">
-        Create an account to view and manage your bank account.
-      </p>
-      <p>
-        Already has account? <a href="/login">Login</a>
-      </p>
-      <form onSubmit={handleSubmit} className="form-login">
-        <div className="form-input">
-          <label for="fullName" class="label">
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            class="input"
-            required
-          />
+    <div className="sign-up">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className="paper">
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form onSubmit={handleSubmit} className="form">
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="fullName"
+              label="Full Name"
+              name="fullName"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+            />
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid item xs="3">
+                <FormControl variant="outlined" className="type-identity">
+                  <InputLabel id="identity_type">
+                    Type
+                  </InputLabel>
+                  <Select
+                    id="identity_type"
+                    label="Age"
+                    name="identity_type"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="cmnd">CMND</MenuItem>
+                    <MenuItem value="cccd">CCCD</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs="9">
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="identity_id"
+                  label="Identity ID"
+                  name="identity_id"
+                />
+              </Grid>
+            </Grid>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              autoComplete="current-password"
+            />
+            {error && (
+              <p className="error">
+                Confirm password does not match with password
+              </p>
+            )}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="submit"
+            >
+              Sign Up
+            </Button>
+          </form>
         </div>
-        <div className="form-input">
-          <label for="email" className="label">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="input"
-            required
-          />
-        </div>
-        <div className="form-input">
-          <label for="username" className="label">
-            Username
-          </label>
-          <input id="username" name="username" className="input" required />
-        </div>
-        <div className="form-input">
-          <label for="identity_type" class="label">
-            Identify Type
-          </label>
-          <select
-            type="text"
-            id="identity_type"
-            name="identity_type"
-            class="input"
-            required
-          >
-            <option value="cmnd">Chứng minh nhân dân.</option>
-            <option value="cccd">Căn cước công dân</option>
-          </select>
-        </div>
-        <div className="form-input">
-          <label for="identity_id" class="label">
-            Identity ID
-          </label>
-          <input
-            type="text"
-            id="identity_id"
-            name="identity_id"
-            class="input"
-            required
-          />
-        </div>
-        <div className="form-input">
-          <label for="password" class="label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="input"
-            required
-          />
-        </div>
-        <div className="form-input">
-          <label for="password" class="label">
-            Confirm password
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            class="input"
-            required
-          />
-        </div>
-        {error && (
-          <p className="error">Confirm password does not match with password</p>
-        )}
-        <Button variant="primary" type="submit">
-          Create your account
-        </Button>
-      </form>
+      </Container>
     </div>
   );
 }

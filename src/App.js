@@ -14,7 +14,8 @@ import {
   Transfer,
   ForgotPassword,
   User_Management,
-} from './Component';
+  Change_password
+} from "./Component";
 
 function App() {
   return (
@@ -39,7 +40,12 @@ function App() {
           <PrivateRoute path="/transaction" exact component={Transaction} />
           <PrivateRoute path="/transfer" exact component={Transfer} />
           <PrivateRoute path="/account" exact component={List_account} />
-          <PrivateRoute path="/user-management" exact component={User_Management} />
+          <PrivateRoute path="/user/changePassword" exact component={Change_password} />
+          <PrivateRoute
+            path="/user-management"
+            exact
+            component={User_Management}
+          />
           <Route path="*">
             <div className="page-404">
               <img src="/images/frame.png" alt="" />

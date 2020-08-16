@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { Button, Modal, Form, ListGroup } from "react-bootstrap";
 import { changepassword } from "../../Redux/Action/paymentAction";
-import _ from "lodash";
-import { setCookie } from "../../helpers/cookie";
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Typography,
+  Container,
+} from "@material-ui/core";
 import { toast } from "react-toastify";
 
 function Change_password() {
-  const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -19,76 +21,100 @@ function Change_password() {
       oldPass: formData.get("oldPassword"),
       newPass: formData.get("newPassword"),
     };
-    if (formData.get("oldPassword") !== formData.get("confirmPassword")) {
+    if (formData.get("newPassword") !== formData.get("confirmPassword")) {
       setError(true);
       return;
     } else setError(false);
     changepassword(data)
       .then((res) => {
         if (res.status === 200) {
-          const token = _.get(res, "data.token");
-          setCookie("user_token", token);
-          handleClose();
           toast.success("Change password successfully");
+          window.location.replace("/");
         }
       })
       .catch((err) => {
-        toast.error("Change password fail");
+        toast.error("Change password unsuccessfully");
       });
   };
   return (
-    <>
-      <ListGroup.Item
-        className="btn_changepassword"
-        type="button"
-        onClick={handleShow}
-      >
-        <img src="/images/changepassword.svg" height="10%" width="10%"></img>
-        Change password
-      </ListGroup.Item>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Change Password</Modal.Title>
-        </Modal.Header>
-        <form onSubmit={handleSubmit}>
-          <Modal.Body className="change-password-modal">
-            <Form.Group>
-              <Form.Label>Old Password</Form.Label>
-              <Form.Control
-                id="oldPassword"
-                name="oldPassword"
-                type="password"
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>New Password</Form.Label>
-              <Form.Control
-                id="newPassword"
-                name="newPassword"
-                type="password"
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Confirm New Password</Form.Label>
-              <Form.Control
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" type="submit">
-              Change
-            </Button>
-          </Modal.Footer>
-        </form>
-      </Modal>
-    </>
+    <div className="change_password">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className="paper">
+          <img
+            className="icon-change-password"
+            src="/images/change-password-icon.svg"
+            alt=""
+          ></img>
+          <Typography component="h1" variant="h5">
+            Change password
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              variant="standard"
+              margin="normal"
+              required
+              fullWidth
+              name="oldPassword"
+              label="Old Password"
+              type="password"
+              id="oldPassword"
+              autoComplete="current-password"
+            />
+            <TextField
+              variant="standard"
+              margin="normal"
+              required
+              fullWidth
+              name="newPassword"
+              label="New Password"
+              type="password"
+              id="newPassword"
+              autoComplete="current-password"
+            />
+            <TextField
+              variant="standard"
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm New Password"
+              type="password"
+              id="confirmPassword"
+              autoComplete="current-password"
+            />
+            {error && (
+              <p className="error">
+                Confirm password does not match with password
+              </p>
+            )}
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+              className="group-btn"
+            >
+              <Grid item xs="6">
+                <Button href="/" fullWidth variant="contained">
+                  Back
+                </Button>
+              </Grid>
+              <Grid item xs="6">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                >
+                  Change
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
+    </div>
   );
 }
 

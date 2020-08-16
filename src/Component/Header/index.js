@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.scss";
 import { getCookie, removeCookie } from "../../helpers/cookie";
+import Profile from "../profile";
 
 const Header = () => {
   const isLogin = getCookie("user_token");
@@ -10,16 +11,13 @@ const Header = () => {
     window.location.replace("/");
   };
 
-  const handleShowProfile = () => {
-    let profile = document.getElementById("profileRef");
-    profile && profile.classList.add("show-profile");
-  };
-
   return (
     <div className="header">
       <div className="header-nav">
         <div className="nav-bar">
-          <p className="logo" onClick={() => window.location.replace("/")}>VNBC Bank</p>
+          <p className="logo" onClick={() => window.location.replace("/")}>
+            VNBC Bank
+          </p>
           {!isLogin ? (
             <div className="link-group">
               <a href="/login" className="link-btn">
@@ -43,12 +41,10 @@ const Header = () => {
               <a href="/user-management" className="link-btn">
                 User Management
               </a>
-              <span onClick={handleShowProfile} className="link-btn">
-                Profile
-              </span>
               <span onClick={handleLogout} className="link-btn">
                 Log out
               </span>
+              <Profile />
             </div>
           )}
         </div>
