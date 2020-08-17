@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { Tabs, Tab, Table, Button, Modal } from "react-bootstrap";
-import { getListAccount } from "../../Redux/Action/userAction";
+import {
+  getListAccount,
+  lockAccount,
+  unlockAccount,
+} from "../../Redux/Action/userAction";
 import { get } from "lodash";
 import TransactionHistory from "../transaction";
+import { toast } from "react-toastify";
 
 function List_account({ isModal, handleClose }) {
   const [accounts, setAccounts] = useState([]);
@@ -11,16 +16,41 @@ function List_account({ isModal, handleClose }) {
   const [accountSelected, setAccountSelected] = useState();
 
   useEffect(() => {
+    handleGetListAccount();
+  }, []);
+
+  const handleGetListAccount = () => {
     getListAccount().then((res) => {
       if (res.error) return;
       const { data } = res;
       setAccounts(get(data, "accounts"));
     });
-  }, []);
+  };
 
   const handleShowTransHistory = (account) => {
     setShowTransHistory(true);
     setAccountSelected(account);
+  };
+
+  const handleLockAccount = (account_id) => {
+    lockAccount({ account_id })
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Lock account successfully");
+          handleGetListAccount();
+        }
+      })
+      .catch((err) => {});
+  };
+  const handleUnlockAccount = (account_id) => {
+    unlockAccount({ account_id })
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Unlock account successfully");
+          handleGetListAccount();
+        }
+      })
+      .catch((err) => {});
   };
   return (
     <div className="btn-close-form">
@@ -72,19 +102,30 @@ function List_account({ isModal, handleClose }) {
                         </Button>
                       </td>
                       <td>{account.createdAt}</td>
-                      {account.active === true ? (
-                        <td>Active</td>
-                      ) : (
-                        <td>Block</td>
-                      )}
+                      {account.active ? <td>Active</td> : <td>Block</td>}
                       <td className="un-lock">
-                        <Button variant="primary" className="btn">
-                          Unlock
-                        </Button>
-                        <Button variant="danger" className="btn">
-                          {" "}
-                          Lock{" "}
-                        </Button>
+                        {account.active ? (
+                          <Button
+                            variant="danger"
+                            className="btn"
+                            onClick={() =>
+                              handleLockAccount(account.account_id)
+                            }
+                          >
+                            {" "}
+                            Lock{" "}
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="primary"
+                            className="btn"
+                            onClick={() =>
+                              handleUnlockAccount(account.account_id)
+                            }
+                          >
+                            Unlock
+                          </Button>
+                        )}
                       </td>
                     </tr>
                   ) : (
@@ -123,11 +164,7 @@ function List_account({ isModal, handleClose }) {
                       <td>{account.createdAt}</td>
                       <td>{account.interest_rate}</td>
                       <td>1/2/2020</td>
-                      {account.active === true ? (
-                        <td>Active</td>
-                      ) : (
-                        <td>Block</td>
-                      )}
+                      {account.active ? <td>Active</td> : <td>Block</td>}
                       <td>{account.term}</td>
                       <td>{account.maturity_date}</td>
                       <td className="bt-withdraw-money">
