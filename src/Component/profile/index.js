@@ -47,10 +47,6 @@ function Profile() {
         console.log("err: ", err);
       });
   }, []);
-<<<<<<< HEAD
-=======
-
->>>>>>> 6145f924b3ec01f56b2bdaf77218a543a3db645c
   const [fileUpload, setFileUpload] = useState(null);
 
   const handleSubmit = (event) => {

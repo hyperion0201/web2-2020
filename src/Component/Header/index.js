@@ -15,13 +15,6 @@ const Header = () => {
     <div className="header">
       <div className="header-nav">
         <div className="nav-bar">
-<<<<<<< HEAD
-          <p className="logo" onClick={() => window.location.replace("/")}>
-            VNBC Bank
-          </p>
-
-=======
->>>>>>> 6145f924b3ec01f56b2bdaf77218a543a3db645c
           <img
             className="logo"
             onClick={() => window.location.replace("/")}
