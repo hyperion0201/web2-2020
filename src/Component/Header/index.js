@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./style.scss";
 import { getCookie, removeCookie } from "../../helpers/cookie";
 import Profile from "../profile";
+import { get } from "lodash";
+import { getStorage } from "../../helpers/localStorage";
 
 const Header = () => {
+  const headerRef = useRef();
+
   const isLogin = getCookie("user_token");
+  const pathname = get(window, "location.pathname");
+  const user = getStorage("user");
+
+  useEffect(() => {
+    if (["/login", "/register"].includes(pathname)) {
+      headerRef.current.classList.add("transparent-header");
+    } else {
+      headerRef.current.classList.remove("transparent-header");
+    }
+  }, [pathname]);
 
   const handleLogout = () => {
     removeCookie("user_token");
-    window.location.replace("/");
+    window.location.replace("/login");
   };
 
   return (
-    <div className="header">
+    <div ref={headerRef} className="header">
       <div className="header-nav">
         <div className="nav-bar">
           <img
@@ -38,13 +52,15 @@ const Header = () => {
               <a href="/transfer" className="link-btn">
                 Transfer
               </a>
-              <a href="/user-management" className="link-btn">
-                User Management
-              </a>
+              {user && user.role === "staff" && (
+                <a href="/user-management" className="link-btn">
+                  User Management
+                </a>
+              )}
+              <Profile />
               <span onClick={handleLogout} className="link-btn">
                 Log out
               </span>
-              <Profile />
             </div>
           )}
         </div>

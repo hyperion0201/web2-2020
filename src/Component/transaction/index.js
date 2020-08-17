@@ -10,6 +10,7 @@ function Transaction({ accountSelected }) {
   useEffect(() => {
     if (accountSelected) {
       getListTransaction(accountSelected.account_id).then((res) => {
+        console.log("res: ", res);
         if (res.status === 200) {
           setListTransaction(get(res, "data.data"));
         }
@@ -59,24 +60,26 @@ function Transaction({ accountSelected }) {
         <thead className="header-tab">
           <tr>
             <th>No</th>
-            <th>Account Number</th>
-            <th> Amount Of Money (+) </th>
-            <th> Amount Of Money (-) </th>
-            <th>Transaction Time </th>
-            <th>From (To) Account</th>
+            <th>Action</th>
+            <th>Amount Of Money</th>
+            <th>Date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Exchange with</th>
             <th>From (To) Bank </th>
           </tr>
         </thead>
-        {trans.map((tran) => (
-          <tbody className="body">
+        {listTransaction.map((tran, i) => (
+          <tbody key={`${tran.deposit_account_id}-${i}`} className="body">
             <tr>
-              <th>{tran.id}</th>
-              <th>{tran.accountNo}</th>
-              <th>{tran.moneyInto}</th>
-              <th>{tran.moneyOut}</th>
-              <th>{tran.time}</th>
-              <th>{tran.guestAccount}</th>
-              <th>{tran.guestBank}</th>
+              <th>{i}</th>
+              <th className="action">{tran.action}</th>
+              <th>{tran.amount}</th>
+              <th>{tran.date}</th>
+              <th>{tran.deposit_account_id}</th>
+              <th>{tran.receive_account_id}</th>
+              <th>{tran.receive_name || tran.deposit_name}</th>
+              <th>VNBC Bank</th>
             </tr>
           </tbody>
         ))}

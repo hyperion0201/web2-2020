@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import CreateAccount from "../account";
+import { getUserInfo } from "../../Redux/Action/userAction";
+import { setStorage } from "../../helpers/localStorage";
 
 function Homepage() {
+  useEffect(() => {
+    getUserInfo().then((res) => {
+      const { data } = res;
+      data && setStorage("user", data);
+    });
+  }, []);
+
   return (
     <div className="homepage">
       <MainOuter />
@@ -88,34 +97,40 @@ const Optional = () => {
     {
       icon: "location_city",
       title: "Various Locations",
-      description: "We have offices in many countries including the USA and the UK."
+      description:
+        "We have offices in many countries including the USA and the UK.",
     },
     {
       icon: "phone_android",
       title: "Mobile Banking Apps",
-      description: "Get instant access to your account on any device using our banking apps."
+      description:
+        "Get instant access to your account on any device using our banking apps.",
     },
     {
       icon: "person_pin",
       title: "Family & Friends Programs",
-      description: "Our Bank has special programs with benefits for family members."
+      description:
+        "Our Bank has special programs with benefits for family members.",
     },
     {
       icon: "perm_phone_msg",
       title: "24/7 Support",
-      description: "Our Support team is always ready to help you solve any banking issues."
+      description:
+        "Our Support team is always ready to help you solve any banking issues.",
     },
     {
       icon: "event_note",
       title: "Personal Profile",
-      description: "Register your free personal profile online to begin using our services."
+      description:
+        "Register your free personal profile online to begin using our services.",
     },
     {
       icon: "settings",
       title: "Settings",
-      description: "Registered clients can edit the banking account settings in 2 clicks."
+      description:
+        "Registered clients can edit the banking account settings in 2 clicks.",
     },
-  ]
+  ];
 
   return (
     <div className="my-container optional">
@@ -126,13 +141,13 @@ const Optional = () => {
         We provide our clients with a number of benefits.
       </p>
       <div className="list-option">
-      {listOption.map(item => (
-        <div key={item.title} className="option">
-          <i class="material-icons icon">{item.icon}</i>
-          <p className="item-title">{item.title}</p>
-          <p className="item-description">{item.description}</p>
-        </div>
-      ))}
+        {listOption.map((item) => (
+          <div key={item.title} className="option">
+            <i class="material-icons icon">{item.icon}</i>
+            <p className="item-title">{item.title}</p>
+            <p className="item-description">{item.description}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

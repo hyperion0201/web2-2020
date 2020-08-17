@@ -3,25 +3,25 @@ import "./index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { isLogin } from "./helpers/cookie";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { getStorage } from "./helpers/localStorage";
 import {
   Homepage,
   Header,
   Login,
   Signup,
-  Profile,
   List_account,
   Transfer,
   ForgotPassword,
   User_Management,
-  Change_password
+  Change_password,
 } from "./Component";
 
 function App() {
+  const user = getStorage("user");
   return (
     <div>
       <BrowserRouter>
         <Header />
-        <Profile />
         <Switch>
           <PublicRoute path="/login" exact name="Login" component={Login} />
           <PublicRoute
@@ -38,10 +38,15 @@ function App() {
           <PrivateRoute path="/" exact name="Home" component={Homepage} />
           <PrivateRoute path="/transfer" exact component={Transfer} />
           <PrivateRoute path="/account" exact component={List_account} />
-          <PrivateRoute path="/user/changePassword" exact component={Change_password} />
           <PrivateRoute
+            path="/user/changePassword"
+            exact
+            component={Change_password}
+          />
+          <AdminRoute
             path="/user-management"
             exact
+            restricted={user && user.role === "staff"}
             component={User_Management}
           />
           <Route path="*">

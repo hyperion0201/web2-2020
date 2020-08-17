@@ -18,6 +18,25 @@
     font-weight: 600;
     max-width: 1200px;
     margin: auto;
+    .link-group {
+      display: flex;
+      align-items: center;
+      .MuiButton-text {
+        &:focus {
+          outline: none;
+        }
+      }
+      .MuiButton-label {
+        color: white;
+        text-transform: none;
+        font-size: 16px;
+        padding: 10px 15px;
+        &:hover {
+          background: #f4f4f4;
+          color: #192637;
+        }
+      }
+    }
     .logo {
       cursor: pointer;
       height: 60px;
@@ -36,11 +55,17 @@
       }
     }
     .sign-up {
-      background: black;
-      color: white;
+      background: white;
+      color: black;
       &:hover {
-        background: #4e4545;
+        background: black;
+        color: white;
       }
     }
   }
+}
+
+//transparent header
+.transparent-header {
+  background: transparent;
 }

@@ -44,7 +44,7 @@ function Signup() {
     });
   };
   return (
-    <div className="sign-up">
+    <div className="sign-up-form">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className="paper">
