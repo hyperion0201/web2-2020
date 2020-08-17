@@ -44,3 +44,10 @@ export const getListAccount = () => {
 export const setUserInfo = async () => {
   const info = await getUserInfo();
 };
+
+export const lockAccount = (data) => {
+  return request("POST", "account/deactivate", { data });
+};
+export const unlockAccount = (data) => {
+  return request("POST", "account/activate", { data });
+};
