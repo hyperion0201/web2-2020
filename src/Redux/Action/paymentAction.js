@@ -23,3 +23,11 @@ export const createAccount = (data) => {
 export const changepassword = (data) => {
   return request("POST", "user/changePassword", { data });
 };
+
+export const getListTransaction = (id) => {
+  return request("GET", `transaction/transaction-history?accountId=${id}`);
+};
+
+export const transferMoney = (data) => {
+  return request("POST", "transaction/transfer", { data });
+};

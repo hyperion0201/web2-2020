@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { verifyUser, getUserInfo } from "../../Redux/Action/userAction";
+import { getCookie, removeCookie } from "../../helpers/cookie";
 
 import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
@@ -11,15 +12,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import LockIcon from "@material-ui/icons/Lock";
 import EmailIcon from "@material-ui/icons/Email";
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import BrandingWatermarkIcon from "@material-ui/icons/BrandingWatermark";
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
-
 
 function Profile() {
   const [user, setUser] = useState({
@@ -47,16 +47,11 @@ function Profile() {
         console.log("err: ", err);
       });
   }, []);
-
   const [fileUpload, setFileUpload] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-  };
-  const handleCloseProfile = () => {
-    let profile = document.getElementById("profileRef");
-    profile && profile.classList.remove("show-profile");
   };
 
   const onUploadImage = (e) => {
@@ -147,24 +142,6 @@ function Profile() {
                   </ListItemIcon>
                   <ListItemText primary={user.identity_id} />
                 </ListItem>
-                <ListItemLink href="/account">
-                  <ListItemIcon>
-                    <AccountBalanceWalletIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Account" />
-                </ListItemLink>
-                <ListItemLink href="/transaction">
-                  <ListItemIcon>
-                    <ReceiptIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Transaction" />
-                </ListItemLink>
-                <ListItemLink href="/transfer">
-                  <ListItemIcon>
-                    <AttachMoneyIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Transfer" />
-                </ListItemLink>
                 <ListItemLink href="/user/changePassword">
                   <ListItemIcon>
                     <LockIcon />
