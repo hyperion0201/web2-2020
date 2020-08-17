@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.scss";
 import { login } from "../../Redux/Action/userAction";
 import _ from "lodash";
 import { setCookie } from "../../helpers/cookie";
 import { toast } from "react-toastify";
-import { Button } from "react-bootstrap";
-import { get } from "lodash";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Typography,
+  Container,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 function Login() {
   const handleSubmit = (event) => {
@@ -26,51 +35,57 @@ function Login() {
       .catch((err) => toast.error("Email/Username or Password is incorrect"));
   };
   return (
-    <div className="container homepage login-page">
-      <div className="content">
-        <img className="item img" src="/images/frame.png" alt="" />
-        <div className="item">
-          <h2 className="nexttop">Welcome back!</h2>
-          <p class="description">Log in to manage your account.</p>
-          <form onSubmit={handleSubmit} className="form-login">
-            <div className="form-input">
-              <label for="username" className="label">
-                Username
-              </label>
-              <input id="username" name="username" className="input" required />
-            </div>
-            <div className="form-input">
-              <label for="password" class="label">
-                <span>
-                  <div className="label-password">
-                    Password
-                    <a className="forgotpassword" href="/forgot-password">
-                      Forgot password?
-                    </a>
-                  </div>
-                </span>
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                class="input"
-                required
-              />
-            </div>
-            <Button variant="primary" type="submit">
-              Log in
+    <div className="login">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className="paper">
+          <Avatar>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form onSubmit={handleSubmit} className="form" noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="submit"
+            >
+              Sign In
             </Button>
-            <p className="bottom">
-              Create account?{" "}
-              <a class="button-create-account" href="/register">
-                Create an account
-              </a>
-              .
-            </p>
+            <Grid container>
+              <Grid className="link-fogotPassword" item xs>
+                <Link href="/forgot-password" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+            </Grid>
           </form>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

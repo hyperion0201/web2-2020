@@ -1,47 +1,22 @@
 .profile {
-  background-color: #192637;
-  color: white;
-  width: 0;
-  height: 100%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  overflow-x: hidden;
-  transition: 0.3s;
-  .profile-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+  .list {
+    width: 350px;
   }
-  .close {
-    position: absolute;
-    top: 10px;
-    left: 25px;
+  .icon-user {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+  }
+  .username {
+    text-align: center;
+    font-size: 150px !important;
+  }
+  .MuiListItemIcon-root {
+    color: white !important;
   }
 }
-.bg-c {
-  background-color: #192637;
-}
-.show-profile  {
-  width: 400px;
-}
-.background {
-  background-image: url(/images/background.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.text {
-  text-align: center;
-  padding-top: 1.5rem !important;
-  padding-bottom: 0.5rem !important;
-}
-
-.profile_btn_logout {
-  &:hover {
-    background: #808080;
-  }
-  background-color: #192637;
+.MuiPaper-root {
+  background-color: #192637 !important;
+  color: white !important;
 }

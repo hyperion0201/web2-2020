@@ -32,7 +32,7 @@ function Account() {
       })
       .catch((err) => {
         handleClose();
-        toast.error("Create account unsuccessfully");
+        toast.error("Create bank account unsuccessfully");
       });
   };
   return (
