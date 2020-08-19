@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { changepassword } from "../../Redux/Action/paymentAction";
+import { changepassword } from "../../Redux/Action/userAction";
 import {
   Button,
   CssBaseline,

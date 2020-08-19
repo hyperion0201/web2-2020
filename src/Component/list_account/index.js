@@ -52,6 +52,7 @@ function List_account({ isModal, handleClose }) {
       })
       .catch((err) => {});
   };
+  
   return (
     <div className="btn-close-form">
       {isModal && (
@@ -67,7 +68,7 @@ function List_account({ isModal, handleClose }) {
         <TransactionHistory accountSelected={accountSelected} />
       </Modal>
       <div className="outermost">
-        <h1>List of your bank accounts</h1>
+        <h1>Your accounts</h1>
         <Tabs>
           <Tab
             eventKey="credit-account"
@@ -77,7 +78,7 @@ function List_account({ isModal, handleClose }) {
             <Table striped bordered hover variant="dark">
               <thead>
                 <tr>
-                  <th className="order">#</th>
+                  <th className="order">No.</th>
                   <th>Account number</th>
                   <th>Account balance</th>
                   <th className="table-transaction">Transaction history</th>
@@ -143,7 +144,7 @@ function List_account({ isModal, handleClose }) {
             <Table striped bordered hover variant="dark">
               <thead>
                 <tr>
-                  <th className="order">#</th>
+                  <th className="order">No.</th>
                   <th>Account number</th>
                   <th>Account balance</th>
                   <th>Date created</th>

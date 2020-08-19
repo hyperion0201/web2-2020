@@ -1,6 +1,7 @@
 import axios from "axios";
 import configs from "../../Configs";
 import { getCookie } from "../../helpers/cookie";
+
 const baseURL = configs.baseUrl;
 
 const request = async (method, url, data, heads) => {
@@ -21,6 +22,10 @@ export const login = (data) => {
 
 export const register = (data) => {
   return request("POST", "register", { data });
+};
+
+export const changepassword = (data) => {
+  return request("POST", "user/changePassword", { data });
 };
 
 export const forgotpassword = (data) => {
