@@ -78,7 +78,7 @@ function Profile() {
             <div className="list" role="presentation">
               <List component="nav" aria-label="main mailbox folders">
                 <ListItem>
-                  {user.status === "verify" ? (
+                  {user.status === "verified" ? (
                     <img
                       className="icon-user"
                       src="/images/user-verify.svg"
@@ -103,6 +103,13 @@ function Profile() {
                     </p>
                   </ListItem>
                 )}
+
+                {user.status === "banned" && (
+                  <ListItem className="notify-banned">
+                    <p>Your account is being banned.</p>
+                  </ListItem>
+                )}
+
                 {user.status === "unverified" && <ModalUpload />}
                 <ListItem>
                   <ListItemIcon>
