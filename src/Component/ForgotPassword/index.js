@@ -16,6 +16,7 @@ function ForgotPassword() {
       .then((res) => {
         if (res.status === 200) {
           toast.success("Send successfully");
+          window.location.replace("/login");
         }
       })
       .catch((err) => {
@@ -31,15 +32,6 @@ function ForgotPassword() {
       </div>
       <div className="content-forget">
         <form onSubmit={handleSubmit} className="form">
-          {/* <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            className="form-input"
-            placeholder="Enter your email address"
-            required
-          />
-          <input type="submit" className="button form-submit" value="Submit" /> */}
           <div className="form-submit">
             <TextField
               className="form-input"

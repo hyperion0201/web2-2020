@@ -20,10 +20,6 @@ export const createAccount = (data) => {
   return request("POST", "account", { data });
 };
 
-export const changepassword = (data) => {
-  return request("POST", "user/changePassword", { data });
-};
-
 export const getListTransaction = (id) => {
   return request("GET", `transaction/transaction-history?accountId=${id}`);
 };
