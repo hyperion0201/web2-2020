@@ -8,7 +8,7 @@ function Homepage() {
   useEffect(() => {
     getUserInfo().then((res) => {
       const { data } = res;
-      data && setStorage("user", data);
+      data && setStorage("user", data.user);
     });
   }, []);
 

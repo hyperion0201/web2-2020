@@ -1,22 +1,90 @@
-import React, {useState} from 'react';
-import './style.scss';
-import {Table, Button, Modal, Form, Row, Col} from 'react-bootstrap';
-import {List_account} from '../../Component';
+import React, { useState, useEffect, useCallback } from "react";
+import "./style.scss";
+import { Table, Button, Modal } from "react-bootstrap";
+import { List_account } from "../../Component";
+import { TextField } from "@material-ui/core";
+import UserModal from "./UserModal";
+import { getAllUser } from "../../Redux/Action/userAction";
+import { get, debounce } from "lodash";
 
 function User_Management() {
-  const [show, setShow] = useState(false);
+  const [listUser, setListUser] = useState();
+  const [showUserProfile, setShowUserProfile] = useState(false);
+  const [showManageAccount, setShowManageAccount] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [searchKey, setSearchKey] = useState({});
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  useEffect(() => {
+    debounceGetUser();
+  }, [searchKey]);
 
-  const [show2, setShow2] = useState(false);
+  const debounceGetUser = useCallback(
+    debounce(() => {
+      getAllUser(searchKey).then((res) => {
+        res.status === 200 && setListUser(res.data);
+      });
+    }, 500),
+    [searchKey]
+  );
 
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+  const onChangeSearchBox = (key, value) => {
+    setSearchKey({ [key]: value });
+  };
+
+  const closeUserModal = () => setShowUserProfile(false);
+
+  const onShowUserModal = (user) => {
+    setSelectedUser(user);
+    setShowUserProfile(true);
+  };
+
+  const handleEditUser = () => {};
+
+  const closeManageAccount = () => setShowManageAccount(false);
+
+  const handleShowManageAccount = (user) => {
+    setSelectedUser(user);
+    setShowManageAccount(true);
+  };
   return (
     <div className="management-padding">
       <div className="body-management">
         <h2>USER MANAGEMENT</h2>
+        <div className="search-box">
+          <p className="title">Search by: </p>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            label="Username"
+            name="username"
+            value={searchKey.username}
+            onChange={(e) => onChangeSearchBox("username", e.target.value)}
+          />
+          {/* <TextField
+            variant="outlined"
+            margin="normal"
+            name="fullName"
+            label="Full name"
+            value={searchKey.fullName}
+            onChange={(e) => onChangeSearchBox("fullName", e.target.value)}
+          /> */}
+          <TextField
+            variant="outlined"
+            margin="normal"
+            label="Identify ID"
+            name="identity_id"
+            value={searchKey.identity_id}
+            onChange={(e) => onChangeSearchBox("identity_id", e.target.value)}
+          />
+          {/* <TextField
+            variant="outlined"
+            margin="normal"
+            name="email"
+            label="Email"
+            value={searchKey.email}
+            onChange={(e) => onChangeSearchBox("email", e.target.value)}
+          /> */}
+        </div>
         <Table responsive striped bordered>
           <thead className="header-tab">
             <tr>
@@ -28,95 +96,44 @@ function User_Management() {
             </tr>
           </thead>
           <tbody className="body">
-            <tr>
-              <td>TRANDANSOCUTE</td>
-              <td>TRAN DAN</td>
-              <td>321733223</td>
-              <td>TranDanCute@gmail.com</td>
-              <td>
-                <Button variant="primary" className="btn" onClick={handleShow}>
-                  Edit
-                </Button>
-                <Button variant="danger" className="btn-account" onClick={handleShow2}>
-                  All Account
-                </Button>
-              </td>
-            </tr>
+            {(listUser || []).map((item) => (
+              <tr>
+                <td>{item.username}</td>
+                <td>{item.fullName}</td>
+                <td>{item.identity_id}</td>
+                <td>{item.email}</td>
+                <td>
+                  <Button
+                    variant="primary"
+                    className="btn"
+                    onClick={() => onShowUserModal(item)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="danger"
+                    className="btn-account"
+                    onClick={() => handleShowManageAccount(item)}
+                  >
+                    User Accounts
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>PROFILE USER</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group as={Row}>
-                <Form.Label column sm="2" className="padding-label">
-                  Username
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    readOnly
-                    defaultValue="TRANDANSOCUTE"
-                    name="username"
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group as={Row}>
-                <Form.Label column sm="2" className="padding-label">
-                  Fullname
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    type="text"
-                    defaultValue="Tran Dan"
-                    name="fullname"
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group as={Row}>
-                <Form.Label column sm="2" className="padding-label">
-                  Identify Id
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    readOnly
-                    defaultValue="321733223"
-                    name="identifyId"
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group as={Row}>
-                <Form.Label column sm="2" className="padding-label">
-                  Email
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    readOnly
-                    defaultValue="TranDanCute@gmail.com"
-                    name="email"
-                  />
-                </Col>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={handleClose}
-              className="btn-close"
-            >
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose} >
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        {showUserProfile && (
+          <UserModal
+            show={showUserProfile}
+            onClose={closeUserModal}
+            onSave={handleEditUser}
+            selectedItem={selectedUser}
+          />
+        )}
         <div className="modal-account">
-        <Modal show={show2} onHide={handleClose2} size="xl">
-          <List_account isModal={true} handleClose={handleClose2} />
-        </Modal>
+          <Modal show={showManageAccount} onHide={closeManageAccount} size="xl">
+            <List_account isModal={true} handleClose={closeManageAccount} />
+          </Modal>
         </div>
       </div>
     </div>

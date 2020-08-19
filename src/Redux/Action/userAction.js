@@ -56,3 +56,7 @@ export const lockAccount = (data) => {
 export const unlockAccount = (data) => {
   return request("POST", "account/activate", { data });
 };
+
+export const getAllUser = (query) => {
+  return request("POST", "user/all", { data: { query } });
+};
