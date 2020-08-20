@@ -1,18 +1,22 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./style.scss";
 import { getCookie, removeCookie } from "../../helpers/cookie";
 import Profile from "../profile";
 import { get } from "lodash";
-import { getStorage } from "../../helpers/localStorage";
+import { getUserInfo } from "../../Redux/Action/userAction";
 
 const Header = () => {
+  const [user, setUser] = useState({});
   const headerRef = useRef();
 
   const isLogin = getCookie("user_token");
   const pathname = get(window, "location.pathname");
-  const user = getStorage("user");
 
   useEffect(() => {
+    getUserInfo().then((res) => {
+      const { data } = res;
+      data && setUser(data.user);
+    });
     if (["/login", "/register"].includes(pathname)) {
       headerRef.current.classList.add("transparent-header");
     } else {
@@ -22,6 +26,7 @@ const Header = () => {
 
   const handleLogout = () => {
     removeCookie("user_token");
+    localStorage.clear();
     window.location.replace("/login");
   };
 
@@ -46,17 +51,17 @@ const Header = () => {
             </div>
           ) : (
             <div className="link-group">
+              {user && user.role === "staff" && (
+                <a href="/user-management" className="link-btn">
+                  User Management
+                </a>
+              )}
               <a href="/account" className="link-btn">
                 List accounts
               </a>
               <a href="/transfer" className="link-btn">
                 Transfer
               </a>
-              {user && user.role === "staff" && (
-                <a href="/user-management" className="link-btn">
-                  User Management
-                </a>
-              )}
               <Profile />
               <span onClick={handleLogout} className="link-btn">
                 Log out

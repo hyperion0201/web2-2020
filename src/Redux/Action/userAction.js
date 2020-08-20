@@ -60,3 +60,8 @@ export const unlockAccount = (data) => {
 export const getAllUser = (query) => {
   return request("POST", "user/all", { data: { query } });
 };
+
+export const editUser = (payload) => {
+  const { data, id } = payload;
+  return request("PUT", `user/update-user?userId=${id}`, { data });
+};
