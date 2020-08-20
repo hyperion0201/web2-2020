@@ -178,6 +178,7 @@ const ModalUpload = () => {
     verifyUser({ identity: fileUpload.fileSource })
       .then((res) => {
         console.log("res: ", res);
+        window.location.replace("/");
       })
       .catch((err) => {
         console.log("err: ", err);
