@@ -37,8 +37,8 @@ export const getUserInfo = () => {
 };
 
 export const verifyUser = (data) => {
-  const heads = [{ key: "Content-Type", value: "multipart/formdata" }];
-  return request("POST", "user/verify", { data }, heads);
+  const heads = [{ "Content-Type": "multipart/form-data" }];
+  return request("POST", "user/upload-id", { data }, heads);
 };
 
 export const getListAccount = () => {
@@ -53,6 +53,7 @@ export const setUserInfo = async () => {
 export const lockAccount = (data) => {
   return request("POST", "account/deactivate", { data });
 };
+
 export const unlockAccount = (data) => {
   return request("POST", "account/activate", { data });
 };

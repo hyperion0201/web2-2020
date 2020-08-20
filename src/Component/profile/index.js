@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { verifyUser, getUserInfo } from "../../Redux/Action/userAction";
-
-import List from "@material-ui/core/List";
-
-import Modal from "@material-ui/core/Modal";
-import Fade from "@material-ui/core/Fade";
-
-import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-
+import {
+  Grid,
+  Drawer,
+  Button,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Modal,
+  List,
+  Fade,
+} from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import SendIcon from "@material-ui/icons/Send";
 import EmailIcon from "@material-ui/icons/Email";
@@ -20,7 +19,6 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import BrandingWatermarkIcon from "@material-ui/icons/BrandingWatermark";
-import { Grid } from "@material-ui/core";
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -97,20 +95,20 @@ function Profile() {
                 </ListItem>
                 {user.status === "unverified" && (
                   <ListItem className="username">
-                    <p>
-                      Your account is not activated yet, please upload your ID
-                      photo to activate.
-                    </p>
+                    <p>Your account is not activated yet</p>
+                    {user.identity_image_url === null && (
+                      <p>Please upload your ID photo to activate.</p>
+                    )}
                   </ListItem>
                 )}
-
                 {user.status === "banned" && (
                   <ListItem className="notify-banned">
                     <p>Your account is being banned.</p>
                   </ListItem>
                 )}
 
-                {user.status === "unverified" && <ModalUpload />}
+                {user.status === "unverified" &&
+                  user.identity_image_url === null && <ModalUpload />}
                 <ListItem>
                   <ListItemIcon>
                     <EmailIcon />
@@ -173,12 +171,11 @@ const ModalUpload = () => {
         fileSource,
       });
     };
-
     fileReader.readAsDataURL(file);
   };
   const verifyAccount = () => {
     if (!fileUpload) return;
-    verifyUser({ identify: fileUpload.fileSource })
+    verifyUser({ identity: fileUpload.fileSource })
       .then((res) => {
         console.log("res: ", res);
       })
