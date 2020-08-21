@@ -131,6 +131,7 @@ function User_Management() {
               isModal={true}
               handleClose={closeManageAccount}
               selectedItem={selectedUser}
+              isStaff
             />
           </Modal>
         </div>

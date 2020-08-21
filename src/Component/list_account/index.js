@@ -5,20 +5,29 @@ import {
   getListAccount,
   lockAccount,
   unlockAccount,
+  getListAccountByStaff,
 } from "../../Redux/Action/userAction";
 import { get } from "lodash";
 import TransactionHistory from "../transaction";
 import { toast } from "react-toastify";
 
-function List_account({ isModal, handleClose, selectedItem }) {
+function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   const [accounts, setAccounts] = useState([]);
   const [showTransHistory, setShowTransHistory] = useState(false);
   const [accountSelected, setAccountSelected] = useState();
 
   useEffect(() => {
-    handleGetListAccount();
+    if (selectedItem && isStaff) {
+      getAccountByStaff(selectedItem.id);
+    } else handleGetListAccount();
   }, []);
-
+  const getAccountByStaff = (id) => {
+    getListAccountByStaff(id).then((res) => {
+      if (res.error) return;
+      const { data } = res;
+      setAccounts(get(data, "accounts"));
+    });
+  };
   const handleGetListAccount = () => {
     getListAccount().then((res) => {
       if (res.error) return;
