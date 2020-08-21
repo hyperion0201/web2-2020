@@ -43,9 +43,18 @@ h2 {
   .modal-content {
     min-width: 800px;
   }
+
 }
 .img-identity{
   margin-left:15px;
   width: 300px;
   height: 160px;
+}
+.btn-handle{
+  display:flex;
+  justify-content: space-evenly;
+  @media (max-width:925px) {
+    display: flex;
+    flex-direction: column;
+  }
 }

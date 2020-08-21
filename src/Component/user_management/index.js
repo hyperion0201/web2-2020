@@ -97,10 +97,10 @@ function User_Management() {
                 <td>{item.fullName}</td>
                 <td>{item.identity_id}</td>
                 <td>{item.email}</td>
-                <td>
+                <td className="btn-handle">
                   <Button
                     variant="primary"
-                    className="btn"
+                    className="btn-edit"
                     onClick={() => onShowUserModal(item)}
                   >
                     Edit
@@ -118,7 +118,7 @@ function User_Management() {
           </tbody>
         </Table>
         {showUserProfile && (
-          <UserModal
+          <UserModal 
             show={showUserProfile}
             onClose={closeUserModal}
             onSave={handleEditUser}
