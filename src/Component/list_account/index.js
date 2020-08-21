@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import "./style.scss";
-import { Tabs, Tab, Table, Button, Modal } from "react-bootstrap";
+import React, {useState, useEffect} from 'react';
+import './style.scss';
+import {Tabs, Tab, Table, Button, Modal} from 'react-bootstrap';
 import {
   getListAccount,
   lockAccount,
   unlockAccount,
   getListAccountByStaff,
-} from "../../Redux/Action/userAction";
-import { get } from "lodash";
-import TransactionHistory from "../transaction";
-import { toast } from "react-toastify";
+} from '../../Redux/Action/userAction';
+import {get} from 'lodash';
+import TransactionHistory from '../transaction';
+import {toast} from 'react-toastify';
 
-function List_account({ isModal, handleClose, selectedItem, isStaff }) {
+function List_account({isModal, handleClose, selectedItem, isStaff}) {
   const [accounts, setAccounts] = useState([]);
   const [showTransHistory, setShowTransHistory] = useState(false);
   const [accountSelected, setAccountSelected] = useState();
@@ -24,15 +24,15 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   const getAccountByStaff = (id) => {
     getListAccountByStaff(id).then((res) => {
       if (res.error) return;
-      const { data } = res;
-      setAccounts(get(data, "accounts"));
+      const {data} = res;
+      setAccounts(get(data, 'accounts'));
     });
   };
   const handleGetListAccount = () => {
     getListAccount().then((res) => {
       if (res.error) return;
-      const { data } = res;
-      setAccounts(get(data, "accounts"));
+      const {data} = res;
+      setAccounts(get(data, 'accounts'));
     });
   };
 
@@ -42,20 +42,20 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   };
 
   const handleLockAccount = (account_id) => {
-    lockAccount({ account_id })
+    lockAccount({account_id})
       .then((res) => {
         if (res.status === 200) {
-          toast.success("Lock account successfully");
+          toast.success('Lock account successfully');
           handleGetListAccount();
         }
       })
       .catch((err) => {});
   };
   const handleUnlockAccount = (account_id) => {
-    unlockAccount({ account_id })
+    unlockAccount({account_id})
       .then((res) => {
         if (res.status === 200) {
-          toast.success("Unlock account successfully");
+          toast.success('Unlock account successfully');
           handleGetListAccount();
         }
       })
@@ -63,11 +63,13 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   };
 
   return (
-    <div className="btn-close-form">
+    <>
       {isModal && (
-        <i className="material-icons" onClick={handleClose}>
-          close
-        </i>
+        <div className="btn-close-form">
+          <i className="material-icons" onClick={handleClose}>
+            close
+          </i>
+        </div>
       )}
       <Modal
         show={showTransHistory}
@@ -78,7 +80,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
       </Modal>
       <div className="outermost">
         <h1>
-          {selectedItem ? `${selectedItem.fullName} accounts` : "Your accounts"}
+          {selectedItem ? `${selectedItem.fullName} accounts` : 'Your accounts'}
         </h1>
         <Tabs>
           <Tab
@@ -100,7 +102,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
               </thead>
               {accounts.map((account) => (
                 <tbody>
-                  {account.account_type === "spending" ? (
+                  {account.account_type === 'spending' ? (
                     <tr>
                       <td>{account.id}</td>
                       <td>{account.account_id}</td>
@@ -124,8 +126,8 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
                               handleLockAccount(account.account_id)
                             }
                           >
-                            {" "}
-                            Lock{" "}
+                            {' '}
+                            Lock{' '}
                           </Button>
                         ) : (
                           <Button
@@ -168,7 +170,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
               </thead>
               {accounts.map((account) => (
                 <tbody>
-                  {account.account_type === "saving" ? (
+                  {account.account_type === 'saving' ? (
                     <tr>
                       <td>{account.id}</td>
                       <td>{account.account_id}</td>
@@ -192,7 +194,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
           </Tab>
         </Tabs>
       </div>
-    </div>
+    </>
   );
 }
 
