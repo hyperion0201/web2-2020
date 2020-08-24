@@ -9,6 +9,8 @@ import {
 } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { createAccount } from "../../Redux/Action/paymentAction";
+import { get } from "lodash";
+
 function Account() {
   const [show, setShow] = useState(false);
   const [type, setAccountType] = useState("spending");
@@ -25,7 +27,10 @@ function Account() {
     };
     createAccount(data)
       .then((res) => {
-        if (res.status === 200) {
+        if (get(res, "data.error")) {
+          toast.error(get(res, "data.error.message"));
+          handleClose();
+        } else if (res.status === 200) {
           handleClose();
           toast.success("Create bank account successfully!");
         }
