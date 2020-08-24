@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import './style.scss';
-import {Tabs, Tab, Table, Button, Modal} from 'react-bootstrap';
+import {Tabs, Tab, Table, Button, Modal,Form} from 'react-bootstrap';
 import {
   getListAccount,
   lockAccount,
   unlockAccount,
   getListAccountByStaff,
 } from '../../Redux/Action/userAction';
-import {get} from 'lodash';
+import {get, filter} from 'lodash';
 import TransactionHistory from '../transaction';
 import {toast} from 'react-toastify';
 
@@ -15,6 +15,25 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
   const [accounts, setAccounts] = useState([]);
   const [showTransHistory, setShowTransHistory] = useState(false);
   const [accountSelected, setAccountSelected] = useState();
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const close = () => setShow(false);
+
+  const [listAccount, setListAccount] = useState([]);
+  useEffect(() => {
+    getListAccount().then((res) => {
+      if (res.error) return;
+      const {data} = res;
+      const list = (
+        filter(
+          get(data, 'accounts'),
+          (item) => item.account_type !== 'saving'
+        ) || []
+      ).map((account) => account.account_id);
+      setListAccount(list);
+    });
+  }, []);
 
   useEffect(() => {
     if (selectedItem && isStaff) {
@@ -181,13 +200,46 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
                       {account.active ? <td>Active</td> : <td>Block</td>}
                       <td>{account.term}</td>
                       <td>{account.maturity_date}</td>
-                      <td className="bt-withdraw-money">
-                        <Button variant="danger">Withdraw money</Button>
-                      </td>
+                      {isStaff ? (
+                        <td className="btn-withdraw-money">
+                          <Button variant="danger">Active</Button>
+                        </td>
+                      ) : (
+                        <td className="btn-withdraw-money">
+                          <Button variant="danger" onClick={handleShow}>
+                            Withdraw Money
+                          </Button>
+                        </td>
+                      )}
                     </tr>
                   ) : (
                     <div></div>
                   )}
+                  <Modal show={show} onHide={close}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Choose your credit account</Modal.Title>
+                    </Modal.Header>
+                    <Form.Text className="text-muted">To withdraw money from saving account, you need to select one of the credit account. </Form.Text>
+
+                    <Modal.Body>
+                      <label for="acc-id" className="acc-id">
+                        Account number
+                      </label>
+                      <select name="acc-id">
+                        <option value={account.account_id}>
+                          {account.account_id}
+                        </option>
+                      </select>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={close}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={close}>
+                        Submit
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </tbody>
               ))}
             </Table>
