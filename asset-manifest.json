@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/web2-2020/static/css/main.e1169e61.chunk.css",
+    "main.js": "/web2-2020/static/js/main.af72cd1e.chunk.js",
+    "main.js.map": "/web2-2020/static/js/main.af72cd1e.chunk.js.map",
+    "runtime-main.js": "/web2-2020/static/js/runtime-main.f070835a.js",
+    "runtime-main.js.map": "/web2-2020/static/js/runtime-main.f070835a.js.map",
+    "static/css/2.37865b2a.chunk.css": "/web2-2020/static/css/2.37865b2a.chunk.css",
+    "static/js/2.0e5a6a05.chunk.js": "/web2-2020/static/js/2.0e5a6a05.chunk.js",
+    "static/js/2.0e5a6a05.chunk.js.map": "/web2-2020/static/js/2.0e5a6a05.chunk.js.map",
+    "index.html": "/web2-2020/index.html",
+    "precache-manifest.f003b07e21bac8c067b6690cd74597bc.js": "/web2-2020/precache-manifest.f003b07e21bac8c067b6690cd74597bc.js",
+    "service-worker.js": "/web2-2020/service-worker.js",
+    "static/css/2.37865b2a.chunk.css.map": "/web2-2020/static/css/2.37865b2a.chunk.css.map",
+    "static/css/main.e1169e61.chunk.css.map": "/web2-2020/static/css/main.e1169e61.chunk.css.map",
+    "static/js/2.0e5a6a05.chunk.js.LICENSE.txt": "/web2-2020/static/js/2.0e5a6a05.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f070835a.js",
+    "static/css/2.37865b2a.chunk.css",
+    "static/js/2.0e5a6a05.chunk.js",
+    "static/css/main.e1169e61.chunk.css",
+    "static/js/main.af72cd1e.chunk.js"
+  ]
+}
