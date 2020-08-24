@@ -3,6 +3,15 @@ import "./style.scss";
 import CreateAccount from "../account";
 import { getUserInfo } from "../../Redux/Action/userAction";
 import { setStorage } from "../../helpers/localStorage";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+} from "@material-ui/core";
 
 function Homepage() {
   useEffect(() => {
@@ -18,6 +27,7 @@ function Homepage() {
       <AboutBank />
       <FinancialStatistics />
       <Optional />
+      <InterestRate />
     </div>
   );
 }
@@ -148,6 +158,48 @@ const Optional = () => {
             <p className="item-description">{item.description}</p>
           </div>
         ))}
+      </div>
+    </div>
+  );
+};
+
+const InterestRate = () => {
+  const rateList = [
+    { key: "unlimit", name: "Unlimit", rate: 0.5 },
+    { key: "1", name: "1 Years", rate: 1.5 },
+    { key: "2", name: "2 Years", rate: 2 },
+    { key: "3", name: "3 Years", rate: 2.5 },
+    { key: "6", name: "6 Years", rate: 3.5 },
+    { key: "9", name: "9 Years", rate: 4.5 },
+    { key: "12", name: "12 Years", rate: 6 },
+  ];
+  return (
+    <div className="interest-rate my-container">
+      <div className="img">
+        <img src="/images/img2.jpg" alt="" />
+      </div>
+      <div className="table-rate">
+        <h3>Interest Rate</h3>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Term</TableCell>
+                <TableCell align="right">%</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rateList.map((row) => (
+                <TableRow key={row.key}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{`${row.rate} %`}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ const Header = () => {
   const handleLogout = () => {
     removeCookie("user_token");
     localStorage.clear();
-    window.location.replace("/login");
+    window.location.replace("/");
   };
 
   return (
