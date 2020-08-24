@@ -35,7 +35,7 @@ function App() {
             exact
             component={ForgotPassword}
           />
-          <PrivateRoute path="/" exact name="Home" component={Homepage} />
+          <Route path="/" exact name="Home" component={Homepage} />
           <PrivateRoute path="/transfer" exact component={Transfer} />
           <PrivateRoute path="/account" exact component={List_account} />
           <PrivateRoute
