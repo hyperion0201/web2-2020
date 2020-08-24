@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./style.scss";
-import { get } from "lodash";
+import { get, filter } from "lodash";
 import { getListAccount } from "../../Redux/Action/userAction";
 import { transferMoney } from "../../Redux/Action/paymentAction";
 import { toast } from "react-toastify";
@@ -12,9 +12,12 @@ function Transfer() {
     getListAccount().then((res) => {
       if (res.error) return;
       const { data } = res;
-      const list = (get(data, "accounts") || []).map(
-        (account) => account.account_id
-      );
+      const list = (
+        filter(
+          get(data, "accounts"),
+          (item) => item.account_type !== "saving"
+        ) || []
+      ).map((account) => account.account_id);
       setListAccount(list);
     });
   }, []);

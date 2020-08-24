@@ -57,3 +57,16 @@ export const lockAccount = (data) => {
 export const unlockAccount = (data) => {
   return request("POST", "account/activate", { data });
 };
+
+export const getAllUser = (query) => {
+  return request("POST", "user/all", { data: { query } });
+};
+
+export const editUser = (payload) => {
+  const { data, id } = payload;
+  return request("PUT", `user/update-user?userId=${id}`, { data });
+};
+
+export const getListAccountByStaff = (id) => {
+  return request("GET", `account?userId=${id}`);
+};
