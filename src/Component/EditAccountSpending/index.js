@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss";
 import { deposit } from "../../Redux/Action/paymentAction";
-import { Drawer, Button, TextField } from "@material-ui/core";
+import { Drawer, Button, TextField, Typography } from "@material-ui/core";
 import { toast } from "react-toastify";
 import { get } from "lodash";
 
@@ -47,6 +47,9 @@ function EditAccountSpending() {
         >
           <div className="editAccount">
             <div className="list" role="presentation">
+              <Typography component="h1" variant="h5">
+                Deposit
+              </Typography>
               <form onSubmit={handleSubmit} className="form">
                 <TextField
                   variant="outlined"
