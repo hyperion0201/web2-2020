@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
-import "./style.scss";
-import { Table, Button, Modal } from "react-bootstrap";
-import { List_account as ListAccount } from "../../Component";
-import { TextField } from "@material-ui/core";
-import UserModal from "./UserModal";
-import { getAllUser, editUser } from "../../Redux/Action/userAction";
-import { get, debounce } from "lodash";
-import { toast } from "react-toastify";
+import React, {useState, useEffect, useCallback} from 'react';
+import './style.scss';
+import {Table, Button, Modal} from 'react-bootstrap';
+import {List_account as ListAccount} from '../../Component';
+import {TextField} from '@material-ui/core';
+import UserModal from './UserModal';
+import {getAllUser, editUser} from '../../Redux/Action/userAction';
+import {get, debounce} from 'lodash';
+import {toast} from 'react-toastify';
 
 function User_Management() {
   const [listUser, setListUser] = useState();
@@ -29,7 +29,7 @@ function User_Management() {
   );
 
   const onChangeSearchBox = (key, value) => {
-    setSearchKey({ ...searchKey, [key]: value });
+    setSearchKey({...searchKey, [key]: value});
   };
 
   const closeUserModal = () => setShowUserProfile(false);
@@ -40,14 +40,14 @@ function User_Management() {
   };
 
   const handleEditUser = (data) => {
-    editUser({ data, id: selectedUser.id })
+    editUser({data, id: selectedUser.id})
       .then((res) => {
         toast.success(res.message);
         setShowUserProfile(false);
         debounceGetUser();
       })
       .catch((err) => {
-        toast.error(get(err, "response.data.error", "Something went wrong"));
+        toast.error(get(err, 'response.data.error', 'Something went wrong'));
       });
   };
 
@@ -69,7 +69,7 @@ function User_Management() {
             label="Username"
             name="username"
             value={searchKey.username}
-            onChange={(e) => onChangeSearchBox("username", e.target.value)}
+            onChange={(e) => onChangeSearchBox('username', e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -77,7 +77,7 @@ function User_Management() {
             label="Identify ID"
             name="identity_id"
             value={searchKey.identity_id}
-            onChange={(e) => onChangeSearchBox("identity_id", e.target.value)}
+            onChange={(e) => onChangeSearchBox('identity_id', e.target.value)}
           />
         </div>
         <Table responsive striped bordered>
@@ -97,10 +97,10 @@ function User_Management() {
                 <td>{item.fullName}</td>
                 <td>{item.identity_id}</td>
                 <td>{item.email}</td>
-                <td>
+                <td className="btn-handle">
                   <Button
                     variant="primary"
-                    className="btn"
+                    className="btn-edit"
                     onClick={() => onShowUserModal(item)}
                   >
                     Edit
@@ -126,13 +126,20 @@ function User_Management() {
           />
         )}
         <div className="modal-account">
-          <Modal show={showManageAccount} onHide={closeManageAccount} size="xl">
-            <ListAccount
-              isModal={true}
-              handleClose={closeManageAccount}
-              selectedItem={selectedUser}
-              isStaff
-            />
+          <Modal
+            show={showManageAccount}
+            onHide={closeManageAccount}
+            size="xl"
+            scrollable="true"
+          >
+            <Modal.Body>
+              <ListAccount
+                isModal={true}
+                handleClose={closeManageAccount}
+                selectedItem={selectedUser}
+                isStaff
+              />
+            </Modal.Body>
           </Modal>
         </div>
       </div>
