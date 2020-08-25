@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './style.scss';
-import {Tabs, Tab, Table, Button, Modal,Form} from 'react-bootstrap';
+import {Tabs, Tab, Table, Button, Modal, Form} from 'react-bootstrap';
 import {
   getListAccount,
   lockAccount,
@@ -19,6 +19,10 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const close = () => setShow(false);
+
+  const [show2, setShow2] = useState(false);
+  const handleShow2 = () => setShow2(true);
+  const close2 = () => setShow2(false);
 
   const [listAccount, setListAccount] = useState([]);
   useEffect(() => {
@@ -202,7 +206,7 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
                       <td>{account.maturity_date}</td>
                       {isStaff ? (
                         <td className="btn-withdraw-money">
-                          <Button variant="danger">Active</Button>
+                          <Button variant="danger" onClick={handleShow2}>Active</Button>
                         </td>
                       ) : (
                         <td className="btn-withdraw-money">
@@ -219,8 +223,12 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
                     <Modal.Header closeButton>
                       <Modal.Title>Choose your credit account</Modal.Title>
                     </Modal.Header>
-                    <Form.Text className="text-muted">To withdraw money from saving account, you need to select one of the credit account. </Form.Text>
-
+                    <small>
+                      <Form.Text className="text-muted">
+                        To withdraw money from saving account, you need to
+                        select one of the credit account.{' '}
+                      </Form.Text>
+                    </small>
                     <Modal.Body>
                       <label for="acc-id" className="acc-id">
                         Account number
@@ -236,6 +244,44 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
                         Close
                       </Button>
                       <Button variant="primary" onClick={close}>
+                        Submit
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                  <Modal show={show2} onHide={close2}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Saving Account</Modal.Title>
+                    </Modal.Header>
+                    <small>
+                      <Form.Text className="text-muted">
+                        Please select interest rate and due date.
+                      </Form.Text>
+                    </small>
+                    <Modal.Body>
+                    <div className="sv-modal">
+                      <label for="acc-id">
+                        Interest rate :
+                      </label>
+                      <select name="acc-id" className="item-sv">
+                        <option value={0.5} selected>Unlimited</option>
+                        <option value={1.5}>1 Year</option>
+                        <option value={2}>2 Years</option>
+                        <option value={2.5}>3 Years</option>
+                        <option value={3.5}>6 Years</option>
+                        <option value={4.5}>9 Years</option>
+                        <option value={6}>12 Years</option>
+                      </select>
+                      </div>
+                      <div className="sv-modal">
+                      <label for ="due-date">Due date :</label>
+                      <input type="date" name="due-date" className="item-sv2"></input>
+                      </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={close2}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={close2}>
                         Submit
                       </Button>
                     </Modal.Footer>

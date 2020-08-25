@@ -1,9 +1,8 @@
-.outermost{
+.outermost {
   padding: 2% 2%;
   padding-top: 150px;
   text-align: center;
   padding-top: 100px;
-
 }
 .table {
   text-align: center;
@@ -11,36 +10,49 @@
   .order {
     width: 4%;
   }
-  .table-transaction{
-      width: 25%;   
+  .table-transaction {
+    width: 25%;
   }
   .un-lock {
     width: 25%;
-    .btn{
-      margin:5px; 
-      width:75px;
+    .btn {
+      margin: 5px;
+      width: 75px;
     }
-    @media screen and (max-width: 817px){
-     width: 10%;
+    @media screen and (max-width: 817px) {
+      width: 10%;
     }
   }
-  .btn-withdraw-money{
+  .btn-withdraw-money {
     width: 15%;
   }
-
 }
-.tab-table{
-  margin:0 auto;
+.tab-table {
+  margin: 0 auto;
   width: auto;
 }
-.btn-close-form{
- text-align: right;
- cursor: pointer;
- color: black;
+.btn-close-form {
+  cursor: pointer;
+  color: black;
+  text-align: right;
+  @media (max-width:1125px){
+    position: fixed;
+  }
 }
-.acc-id{
+
+.acc-id {
   margin-right: 60px;
 }
-.text-muted{
+.text-muted {
   text-align: center;
+}
+.sv-modal{
+  display: flex;
+  margin: 10px 50px;
+  .item-sv{
+    margin-left: 160px;
+  }
+  .item-sv2{
+    margin-left:103px
+  }
 }
