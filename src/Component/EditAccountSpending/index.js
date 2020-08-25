@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss";
 import { deposit } from "../../Redux/Action/paymentAction";
-import {
-  Drawer,
-  Button,
-  TextField,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  OutlinedInput,
-} from "@material-ui/core";
+import { Drawer, Button, TextField } from "@material-ui/core";
 import { toast } from "react-toastify";
 import { get } from "lodash";
 
@@ -35,15 +25,13 @@ function EditAccountSpending() {
       account_id: formData.get("account_id"),
       amount: formData.get("amount"),
     };
-    if (formData.get("action_type") === "deposit") {
-      deposit(data).then((res) => {
-        if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
-        else if (res.status === 200) {
-          toast.success(get(res, "data.message"));
-          window.location.replace("/user-management");
-        }
-      });
-    }
+    deposit(data).then((res) => {
+      if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
+      else if (res.status === 200) {
+        toast.success(get(res, "data.message"));
+        window.location.replace("/user-management");
+      }
+    });
   };
 
   return (
@@ -59,7 +47,7 @@ function EditAccountSpending() {
         >
           <div className="editAccount">
             <div className="list" role="presentation">
-              <form onSubmit={handleSubmit} className="form" noValidate>
+              <form onSubmit={handleSubmit} className="form">
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -69,40 +57,15 @@ function EditAccountSpending() {
                   label="Account ID"
                   name="account_id"
                 />
-
-                <FormControl
-                  fullWidth
-                  required
-                  margin="normal"
+                <TextField
                   variant="outlined"
-                >
-                  <InputLabel htmlFor="amount">Amount</InputLabel>
-                  <OutlinedInput
-                    id="amount"
-                    label="Amount"
-                    name="amount"
-                    startAdornment={
-                      <InputAdornment position="start">$</InputAdornment>
-                    }
-                    fullWidth
-                  />
-                </FormControl>
-
-                <FormControl
-                  fullWidth
-                  required
                   margin="normal"
-                  variant="outlined"
-                >
-                  <InputLabel id="action_type">Type</InputLabel>
-                  <Select id="action_type" label="Type" name="action_type">
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="deposit">Deposit</MenuItem>
-                    <MenuItem value="withdrawal">Withdrawal</MenuItem>
-                  </Select>
-                </FormControl>
+                  required
+                  fullWidth
+                  id="amount"
+                  label="Amount"
+                  name="amount"
+                />
                 <Button
                   type="submit"
                   fullWidth
