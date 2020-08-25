@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import "./style.scss";
 import { getCookie, removeCookie } from "../../helpers/cookie";
 import Profile from "../profile";
+import EditAccountSpending from "../EditAccountSpending";
 import { get } from "lodash";
 import { getUserInfo } from "../../Redux/Action/userAction";
 
@@ -56,6 +57,7 @@ const Header = () => {
                   User Management
                 </a>
               )}
+              {user && user.role === "staff" && <EditAccountSpending />}
               <a href="/account" className="link-btn">
                 List accounts
               </a>

@@ -14,6 +14,7 @@ import {
   ForgotPassword,
   User_Management,
   Change_password,
+  EditAccountSpending,
 } from "./Component";
 
 function App() {
@@ -48,6 +49,12 @@ function App() {
             exact
             restricted={user && user.role === "staff"}
             component={User_Management}
+          />
+          <AdminRoute
+            path="#"
+            exact
+            restricted={user && user.role === "staff"}
+            component={EditAccountSpending}
           />
           <Route path="*">
             <div className="page-404">

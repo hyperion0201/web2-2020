@@ -94,7 +94,7 @@ function Signup() {
                   </InputLabel>
                   <Select
                     id="identity_type"
-                    label="Age"
+                    label="Type"
                     name="identity_type"
                   >
                     <MenuItem value="">

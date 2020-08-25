@@ -10,6 +10,7 @@ import Transaction from "./transaction";
 import Transfer from "./transfer";
 import ForgotPassword from "./ForgotPassword";
 import User_Management from "./user_management";
+import EditAccountSpending from "./EditAccountSpending";
 
 export {
   Homepage,
@@ -24,4 +25,5 @@ export {
   Change_password,
   ForgotPassword,
   User_Management,
+  EditAccountSpending,
 };
