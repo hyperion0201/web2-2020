@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { verifyUser, getUserInfo } from "../../Redux/Action/userAction";
+import { get } from "lodash";
+import { toast } from "react-toastify";
 import {
   Grid,
   Drawer,
@@ -41,14 +43,10 @@ function Profile() {
   });
 
   useEffect(() => {
-    getUserInfo()
-      .then((res) => {
-        const persons = res.data;
-        setUser(persons.user);
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-      });
+    getUserInfo().then((res) => {
+      const persons = res.data;
+      setUser(persons.user);
+    });
   }, []);
 
   const [showProfile, setState] = useState(false);
@@ -177,11 +175,12 @@ const ModalUpload = () => {
     if (!fileUpload) return;
     verifyUser({ identity: fileUpload.fileSource })
       .then((res) => {
-        console.log("res: ", res);
         window.location.replace("/");
       })
       .catch((err) => {
-        console.log("err: ", err);
+        return toast.error(
+          get(err, "response.statusText") || "Something went wrong"
+        );
       });
   };
   return (

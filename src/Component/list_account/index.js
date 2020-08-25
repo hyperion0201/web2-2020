@@ -1,41 +1,47 @@
-import React, {useState, useEffect} from 'react';
-import './style.scss';
-import {Tabs, Tab, Table, Button, Modal, Form} from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import "./style.scss";
+import { Tabs, Tab, Table, Button, Modal, Form } from "react-bootstrap";
 import {
   getListAccount,
   lockAccount,
   unlockAccount,
   getListAccountByStaff,
-} from '../../Redux/Action/userAction';
-import {get, filter} from 'lodash';
-import TransactionHistory from '../transaction';
-import {toast} from 'react-toastify';
+} from "../../Redux/Action/userAction";
+import { get, filter } from "lodash";
+import TransactionHistory from "../transaction";
+import { toast } from "react-toastify";
+import { withdrawMoney } from "../../Redux/Action/paymentAction";
 
-function List_account({isModal, handleClose, selectedItem, isStaff}) {
+function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   const [accounts, setAccounts] = useState([]);
   const [showTransHistory, setShowTransHistory] = useState(false);
   const [accountSelected, setAccountSelected] = useState();
+  const [desAccount, setDesAccount] = useState("");
 
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (account) => {
+    setAccountSelected(account);
+    setShow(true);
+  };
   const close = () => setShow(false);
 
   const [show2, setShow2] = useState(false);
-  const handleShow2 = () => setShow2(true);
+  const handleShow2 = (account) => {
+    setAccountSelected(account);
+    setShow2(true);
+  };
   const close2 = () => setShow2(false);
 
-  const [listAccount, setListAccount] = useState([]);
   useEffect(() => {
     getListAccount().then((res) => {
       if (res.error) return;
-      const {data} = res;
+      const { data } = res;
       const list = (
         filter(
-          get(data, 'accounts'),
-          (item) => item.account_type !== 'saving'
+          get(data, "accounts"),
+          (item) => item.account_type !== "saving"
         ) || []
       ).map((account) => account.account_id);
-      setListAccount(list);
     });
   }, []);
 
@@ -47,15 +53,25 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
   const getAccountByStaff = (id) => {
     getListAccountByStaff(id).then((res) => {
       if (res.error) return;
-      const {data} = res;
-      setAccounts(get(data, 'accounts'));
+      const { data } = res;
+      setAccounts(get(data, "accounts"));
+      const temp = filter(
+        data.accounts,
+        (acc) => acc.account_type === "spending"
+      );
+      setDesAccount(get(temp[0], "account_id"));
     });
   };
   const handleGetListAccount = () => {
     getListAccount().then((res) => {
       if (res.error) return;
-      const {data} = res;
-      setAccounts(get(data, 'accounts'));
+      const { data } = res;
+      setAccounts(get(data, "accounts"));
+      const temp = filter(
+        data.accounts,
+        (acc) => acc.account_type === "spending"
+      );
+      setDesAccount(get(temp[0], "account_id"));
     });
   };
 
@@ -65,24 +81,42 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
   };
 
   const handleLockAccount = (account_id) => {
-    lockAccount({account_id})
+    lockAccount({ account_id })
       .then((res) => {
         if (res.status === 200) {
-          toast.success('Lock account successfully');
+          toast.success("Lock account successfully");
           handleGetListAccount();
         }
       })
       .catch((err) => {});
   };
   const handleUnlockAccount = (account_id) => {
-    unlockAccount({account_id})
+    unlockAccount({ account_id })
       .then((res) => {
         if (res.status === 200) {
-          toast.success('Unlock account successfully');
+          toast.success("Unlock account successfully");
           handleGetListAccount();
         }
       })
       .catch((err) => {});
+  };
+
+  const onWithdrawMoney = () => {
+    withdrawMoney({
+      des_account_id: desAccount,
+      sav_account_id: accountSelected.account_id,
+    })
+      .then((res) => {
+        console.log("res: ", res);
+        // setShow(false);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  };
+
+  const onChangeDesAccount = (e) => {
+    setDesAccount(e.target.value);
   };
 
   return (
@@ -103,7 +137,7 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
       </Modal>
       <div className="outermost">
         <h1>
-          {selectedItem ? `${selectedItem.fullName} accounts` : 'Your accounts'}
+          {selectedItem ? `${selectedItem.fullName} accounts` : "Your accounts"}
         </h1>
         <Tabs>
           <Tab
@@ -125,7 +159,7 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
               </thead>
               {accounts.map((account) => (
                 <tbody>
-                  {account.account_type === 'spending' ? (
+                  {account.account_type === "spending" ? (
                     <tr>
                       <td>{account.id}</td>
                       <td>{account.account_id}</td>
@@ -149,8 +183,8 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
                               handleLockAccount(account.account_id)
                             }
                           >
-                            {' '}
-                            Lock{' '}
+                            {" "}
+                            Lock{" "}
                           </Button>
                         ) : (
                           <Button
@@ -193,7 +227,7 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
               </thead>
               {accounts.map((account) => (
                 <tbody>
-                  {account.account_type === 'saving' ? (
+                  {account.account_type === "saving" && (
                     <tr>
                       <td>{account.id}</td>
                       <td>{account.account_id}</td>
@@ -206,88 +240,111 @@ function List_account({isModal, handleClose, selectedItem, isStaff}) {
                       <td>{account.maturity_date}</td>
                       {isStaff ? (
                         <td className="btn-withdraw-money">
-                          <Button variant="danger" onClick={handleShow2}>Active</Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => handleShow2(account)}
+                          >
+                            Active
+                          </Button>
                         </td>
                       ) : (
                         <td className="btn-withdraw-money">
-                          <Button variant="danger" onClick={handleShow}>
+                          <Button
+                            variant="danger"
+                            onClick={() => handleShow(account)}
+                          >
                             Withdraw Money
                           </Button>
                         </td>
                       )}
                     </tr>
-                  ) : (
-                    <div></div>
                   )}
-                  <Modal show={show} onHide={close}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Choose your credit account</Modal.Title>
-                    </Modal.Header>
-                    <small>
-                      <Form.Text className="text-muted">
-                        To withdraw money from saving account, you need to
-                        select one of the credit account.{' '}
-                      </Form.Text>
-                    </small>
-                    <Modal.Body>
-                      <label for="acc-id" className="acc-id">
-                        Account number
-                      </label>
-                      <select name="acc-id">
-                        <option value={account.account_id}>
-                          {account.account_id}
-                        </option>
-                      </select>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={close}>
-                        Close
-                      </Button>
-                      <Button variant="primary" onClick={close}>
-                        Submit
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                  <Modal show={show2} onHide={close2}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Saving Account</Modal.Title>
-                    </Modal.Header>
-                    <small>
-                      <Form.Text className="text-muted">
-                        Please select interest rate and due date.
-                      </Form.Text>
-                    </small>
-                    <Modal.Body>
-                    <div className="sv-modal">
-                      <label for="acc-id">
-                        Interest rate :
-                      </label>
-                      <select name="acc-id" className="item-sv">
-                        <option value={0.5} selected>Unlimited</option>
-                        <option value={1.5}>1 Year</option>
-                        <option value={2}>2 Years</option>
-                        <option value={2.5}>3 Years</option>
-                        <option value={3.5}>6 Years</option>
-                        <option value={4.5}>9 Years</option>
-                        <option value={6}>12 Years</option>
-                      </select>
-                      </div>
-                      <div className="sv-modal">
-                      <label for ="due-date">Due date :</label>
-                      <input type="date" name="due-date" className="item-sv2"></input>
-                      </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={close2}>
-                        Close
-                      </Button>
-                      <Button variant="primary" onClick={close2}>
-                        Submit
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
                 </tbody>
               ))}
+              <Modal show={show} onHide={close}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Choose your credit account</Modal.Title>
+                </Modal.Header>
+                <small>
+                  <Form.Text className="text-muted">
+                    To withdraw money from saving account, you need to select
+                    one of the credit account.{" "}
+                  </Form.Text>
+                </small>
+                <Modal.Body>
+                  <label for="des_account_id" className="acc-id">
+                    Account number
+                  </label>
+                  <select
+                    name="des_account_id-id"
+                    value={desAccount}
+                    onChange={onChangeDesAccount}
+                  >
+                    {accounts.map(
+                      (account) =>
+                        account.account_type === "spending" && (
+                          <option value={account.account_id}>
+                            {account.account_id}
+                          </option>
+                        )
+                    )}
+                  </select>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={close}>
+                    Close
+                  </Button>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    onClick={onWithdrawMoney}
+                  >
+                    Submit
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              <Modal show={show2} onHide={close2}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Saving Account</Modal.Title>
+                </Modal.Header>
+                <small>
+                  <Form.Text className="text-muted">
+                    Please select interest rate and due date.
+                  </Form.Text>
+                </small>
+                <Modal.Body>
+                  <div className="sv-modal">
+                    <label for="acc-id">Interest rate :</label>
+                    <select name="acc-id" className="item-sv">
+                      <option value={0.5} selected>
+                        Unlimited
+                      </option>
+                      <option value={1.5}>1 Year</option>
+                      <option value={2}>2 Years</option>
+                      <option value={2.5}>3 Years</option>
+                      <option value={3.5}>6 Years</option>
+                      <option value={4.5}>9 Years</option>
+                      <option value={6}>12 Years</option>
+                    </select>
+                  </div>
+                  <div className="sv-modal">
+                    <label for="due-date">Due date :</label>
+                    <input
+                      type="date"
+                      name="due-date"
+                      className="item-sv2"
+                    ></input>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={close2}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={close2}>
+                    Submit
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </Table>
           </Tab>
         </Tabs>
