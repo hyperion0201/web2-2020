@@ -27,3 +27,7 @@ export const getListTransaction = (id) => {
 export const transferMoney = (data) => {
   return request("POST", "transaction/transfer", { data });
 };
+
+export const deposit = (data) => {
+  return request("POST", "account/charge", { data });
+};
