@@ -35,3 +35,4 @@ export const deposit = (data) => {
 export const withdrawMoney = (data) => {
   return request("POST", "account/withdraw", { data });
 };
+

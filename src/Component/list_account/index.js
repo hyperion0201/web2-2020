@@ -6,7 +6,9 @@ import {
   lockAccount,
   unlockAccount,
   getListAccountByStaff,
+  updateAccountByStaff,
 } from "../../Redux/Action/userAction";
+import { deposit } from "../../Redux/Action/paymentAction";
 import { get, filter } from "lodash";
 import TransactionHistory from "../transaction";
 import { toast } from "react-toastify";
@@ -17,6 +19,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   const [showTransHistory, setShowTransHistory] = useState(false);
   const [accountSelected, setAccountSelected] = useState();
   const [desAccount, setDesAccount] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const [show, setShow] = useState(false);
   const handleShow = (account) => {
@@ -108,11 +111,38 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
     })
       .then((res) => {
         console.log("res: ", res);
-        // setShow(false);
+        setShow(false);
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log("err: ", err);
       });
+  };
+
+  const savingactive = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {
+      maturity_date: formData.get("due-date"),
+      active: true,
+    };
+    const amount = {
+      account_id: accountSelected.account_id,
+      amount: formData.get("amount"),
+    };
+    updateAccountByStaff(data, accountSelected.account_id)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Success");
+        }
+      })
+      .catch((err) => toast.error("Error"));
+    deposit(amount).then((res) => {
+      if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
+      else if (res.status === 200) {
+        toast.success(get(res, "data.message"));
+      }
+    });
   };
 
   const onChangeDesAccount = (e) => {
@@ -172,7 +202,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
                           View transaction history
                         </Button>
                       </td>
-                      <td>{account.createdAt}</td>
+                      <td>{new Date(account.createdAt).toLocaleString()}</td>
                       {account.active ? <td>Active</td> : <td>Block</td>}
                       <td className="un-lock">
                         {account.active ? (
@@ -232,12 +262,14 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
                       <td>{account.id}</td>
                       <td>{account.account_id}</td>
                       <td>{account.account_balance}</td>
-                      <td>{account.createdAt}</td>
+                      <td>{new Date(account.createdAt).toLocaleString()}</td>
                       <td>{account.interest_rate}</td>
-                      <td>1/2/2020</td>
+                      <td>{new Date(account.active_date).toLocaleString()}</td>
                       {account.active ? <td>Active</td> : <td>Block</td>}
                       <td>{account.term}</td>
-                      <td>{account.maturity_date}</td>
+                      <td>
+                        {new Date(account.maturity_date).toLocaleString()}
+                      </td>
                       {isStaff ? (
                         <td className="btn-withdraw-money">
                           <Button
@@ -312,38 +344,44 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
                     Please select interest rate and due date.
                   </Form.Text>
                 </small>
-                <Modal.Body>
-                  <div className="sv-modal">
-                    <label for="acc-id">Interest rate :</label>
-                    <select name="acc-id" className="item-sv">
-                      <option value={0.5} selected>
-                        Unlimited
-                      </option>
-                      <option value={1.5}>1 Year</option>
-                      <option value={2}>2 Years</option>
-                      <option value={2.5}>3 Years</option>
-                      <option value={3.5}>6 Years</option>
-                      <option value={4.5}>9 Years</option>
-                      <option value={6}>12 Years</option>
-                    </select>
-                  </div>
-                  <div className="sv-modal">
-                    <label for="due-date">Due date :</label>
-                    <input
-                      type="date"
-                      name="due-date"
-                      className="item-sv2"
-                    ></input>
-                  </div>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={close2}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={close2}>
-                    Submit
-                  </Button>
-                </Modal.Footer>
+                <form onSubmit={savingactive}>
+                  <Modal.Body>
+                    <div className="sv-modal">
+                      <label for="interest-rate">Interest rate :</label>
+                      <select name="interest-rate" className="item-sv">
+                        <option value={0.5} selected>
+                          Unlimited
+                        </option>
+                        <option value={1.5}>1 Year</option>
+                        <option value={2}>2 Years</option>
+                        <option value={2.5}>3 Years</option>
+                        <option value={3.5}>6 Years</option>
+                        <option value={4.5}>9 Years</option>
+                        <option value={6}>12 Years</option>
+                      </select>
+                    </div>
+                    <div className="sv-modal">
+                      <label for="due-date">Due date :</label>
+                      <input
+                        type="date"
+                        name="due-date"
+                        className="item-sv2"
+                      ></input>
+                    </div>
+                    <div className="sv-modal">
+                      <label for="amount">Amount :</label>
+                      <input name="amount" className="item-sv3"></input>
+                    </div>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={close2}>
+                      Close
+                    </Button>
+                    <Button type="submit" variant="primary">
+                      Submit
+                    </Button>
+                  </Modal.Footer>
+                </form>
               </Modal>
             </Table>
           </Tab>

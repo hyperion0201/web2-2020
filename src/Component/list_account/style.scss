@@ -35,7 +35,7 @@
   cursor: pointer;
   color: black;
   text-align: right;
-  @media (max-width:1125px){
+  @media (max-width: 1125px) {
     position: fixed;
   }
 }
@@ -46,13 +46,16 @@
 .text-muted {
   text-align: center;
 }
-.sv-modal{
+.sv-modal {
   display: flex;
   margin: 10px 50px;
-  .item-sv{
+  .item-sv {
     margin-left: 160px;
   }
-  .item-sv2{
-    margin-left:103px
+  .item-sv2 {
+    margin-left: 103px;
+  }
+  .item-sv3 {
+    margin-left: 87px;
   }
 }

@@ -70,3 +70,7 @@ export const editUser = (payload) => {
 export const getListAccountByStaff = (id) => {
   return request("GET", `account?userId=${id}`);
 };
+
+export const updateAccountByStaff = (data, id) => {
+  return request("PUT", `account/update-account?accountId=${id}`, { data });
+};

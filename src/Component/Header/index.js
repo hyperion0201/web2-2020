@@ -58,12 +58,16 @@ const Header = () => {
                 </a>
               )}
               {user && user.role === "staff" && <EditAccountSpending />}
-              <a href="/account" className="link-btn">
-                List accounts
-              </a>
-              <a href="/transfer" className="link-btn">
-                Transfer
-              </a>
+              {user && user.role !== "staff" && (
+                <a href="/account" className="link-btn">
+                  List accounts
+                </a>
+              )}
+              {user && user.role !== "staff" && (
+                <a href="/transfer" className="link-btn">
+                  Transfer
+                </a>
+              )}
               <Profile />
               <span onClick={handleLogout} className="link-btn">
                 Log out

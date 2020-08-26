@@ -18,6 +18,7 @@ function Transaction({ accountSelected }) {
     }
   }, [accountSelected]);
 
+  console.log("listTransaction: ", listTransaction);
   const today = new Date();
   const date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -43,15 +44,6 @@ function Transaction({ accountSelected }) {
       guestAccount: Math.floor(1000 + Math.random() * (10000 - 1000)),
       guestBank: "TranDan Bank",
     },
-    {
-      id: "003",
-      accountNo: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      moneyInto: 1000 + "$",
-      moneyOut: 0 + "$",
-      time: dateTime,
-      guestAccount: Math.floor(1000 + Math.random() * (10000 - 1000)),
-      guestBank: "TranDan Bank",
-    },
   ];
   return (
     <div className="transaction">
@@ -66,7 +58,7 @@ function Transaction({ accountSelected }) {
             <th>From</th>
             <th>To</th>
             <th>Exchange with</th>
-            <th>From (To) Bank </th>
+            <th>Message</th>
           </tr>
         </thead>
         {listTransaction.map((tran, i) => (
@@ -79,7 +71,7 @@ function Transaction({ accountSelected }) {
               <th>{tran.deposit_account_id}</th>
               <th>{tran.receive_account_id}</th>
               <th>{tran.receive_name || tran.deposit_name}</th>
-              <th>VNBC Bank</th>
+              <th>{tran.message}</th>
             </tr>
           </tbody>
         ))}
