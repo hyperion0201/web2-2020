@@ -27,6 +27,10 @@ function Login() {
     login(data)
       .then((res) => {
         if (res.status === 200) {
+          if (_.get(res, "data.verified_email") === false)
+            return toast.error(
+              "Your account has not approved. Check your email to verify account"
+            );
           const token = _.get(res, "data.token");
           setCookie("user_token", token);
           window.location.replace("/");

@@ -36,11 +36,13 @@ function Signup() {
       setError(true);
       return;
     } else setError(false);
+
     register(data).then((res) => {
       if (get(res, "data.error")) toast.error(get(res, "data.error"));
       else if (res.status === 200) {
-        toast.success("🦄 Create account successfully");
-        window.location.replace("/login");
+        toast.success(
+          "Create account successfully. Please check email to active your account"
+        );
       }
     });
   };
