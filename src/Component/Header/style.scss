@@ -18,6 +18,20 @@
     font-weight: 600;
     max-width: 1200px;
     margin: auto;
+  
+    .had-responsive{
+      display: none;
+      @media (max-width:775px){
+        display: block;
+      }
+  
+    
+    }
+    @media (max-width:775px){
+      .not-responsive{
+        display: none;
+      }
+    }
     .link-group {
       display: flex;
       align-items: center;
@@ -53,6 +67,7 @@
         background: #f4f4f4;
         color: #192637;
       }
+    
     }
     .sign-up {
       background: white;
@@ -69,3 +84,15 @@
 .transparent-header {
   background: transparent;
 }
+.list-account-btn{
+  color:white;
+  padding-left:7px;
+}
+.list-account-btn-staff{
+  color:white;
+  padding-left:15px;
+}
+.background-color-menu-res{
+ background:  linear-gradient(347.96deg, #0085ff 0%, #68ccf3 100%);
+}
+
