@@ -35,10 +35,10 @@ function EditAccountSpending() {
   };
 
   return (
-    <div>
+    <div className="first">
       <React.Fragment key="top">
         <Button onClick={toggleDrawer("top", true)}>
-          Edit account spending
+        <div className="second">Edit account spending</div>
         </Button>
         <Drawer
           anchor="top"

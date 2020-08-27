@@ -1,4 +1,5 @@
 .profile {
+  
   .list {
     width: 350px;
   }
@@ -39,4 +40,13 @@
     height: 50%;
     text-align: center;
   }
+}
+@media (max-width:774px){
+.second{
+  color:white;
+  text-transform: none;
+  font-family:  "Helvetica", "Arial", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
 }

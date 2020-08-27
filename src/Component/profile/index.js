@@ -64,7 +64,7 @@ function Profile() {
   return (
     <div>
       <React.Fragment key="left">
-        <Button onClick={toggleDrawer("left", true)}>Profile</Button>
+        <div ><Button onClick={toggleDrawer("left", true)}><div className="second">Profile</div></Button></div>
         <Drawer
           anchor="left"
           open={showProfile["left"]}
