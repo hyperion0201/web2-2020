@@ -36,19 +36,6 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   const close2 = () => setShow2(false);
 
   useEffect(() => {
-    getListAccount().then((res) => {
-      if (res.error) return;
-      const { data } = res;
-      const list = (
-        filter(
-          get(data, "accounts"),
-          (item) => item.account_type !== "saving"
-        ) || []
-      ).map((account) => account.account_id);
-    });
-  }, []);
-
-  useEffect(() => {
     if (selectedItem && isStaff) {
       getAccountByStaff(selectedItem.id);
     } else handleGetListAccount();
