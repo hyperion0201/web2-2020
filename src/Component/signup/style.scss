@@ -14,9 +14,16 @@
     max-width: 600px;
     margin: auto;
   }
-  .type-identity{
+  .type-identity {
     width: 100px;
     margin-top: 8px;
+  }
+  .identity_issued_date {
+    width: 98% !important;
+    padding-left: 5px !important;
+  }
+  .MuiInputLabel-formControl {
+    left: 5px;
   }
   .MuiContainer-maxWidthXs {
     @media (min-width: 0) {

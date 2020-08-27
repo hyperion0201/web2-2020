@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import store from "./Redux/store";
 
 toast.configure({
-  autoClose: 2000,
+  autoClose: 3000,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,

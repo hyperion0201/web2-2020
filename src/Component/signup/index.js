@@ -12,9 +12,9 @@ import {
   Typography,
   Container,
   FormControl,
-  InputLabel
+  InputLabel,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
 import { get } from "lodash";
 
 function Signup() {
@@ -30,16 +30,19 @@ function Signup() {
       password: formData.get("password"),
       identity_type: formData.get("identity_type"),
       identity_id: formData.get("identity_id"),
+      identity_issued_date: formData.get("identity_issued_date"),
     };
     if (formData.get("password") !== formData.get("confirmPassword")) {
       setError(true);
       return;
     } else setError(false);
+
     register(data).then((res) => {
       if (get(res, "data.error")) toast.error(get(res, "data.error"));
       else if (res.status === 200) {
-        toast.success("🦄 Create account successfully");
-        window.location.replace("/login");
+        toast.success(
+          "Create account successfully. Please check email to active your account"
+        );
       }
     });
   };
@@ -89,14 +92,8 @@ function Signup() {
             >
               <Grid item xs="3">
                 <FormControl variant="outlined" className="type-identity">
-                  <InputLabel id="identity_type">
-                    Type
-                  </InputLabel>
-                  <Select
-                    id="identity_type"
-                    label="Type"
-                    name="identity_type"
-                  >
+                  <InputLabel id="identity_type">Type</InputLabel>
+                  <Select id="identity_type" label="Type" name="identity_type">
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
@@ -105,7 +102,7 @@ function Signup() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs="9">
+              <Grid item xs="5">
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -114,6 +111,19 @@ function Signup() {
                   id="identity_id"
                   label="Identity ID"
                   name="identity_id"
+                />
+              </Grid>
+              <Grid item xs="4">
+                <TextField
+                  id="identity_issued_date"
+                  label="Date of issue"
+                  name="identity_issued_date"
+                  type="date"
+                  className="identity_issued_date"
+                  defaultValue="2017-05-24"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
             </Grid>
