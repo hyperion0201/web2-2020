@@ -3,11 +3,21 @@ import { useForm } from "react-hook-form";
 import "./style.scss";
 import { get, filter } from "lodash";
 import { getListAccount } from "../../Redux/Action/userAction";
-import { transferMoney } from "../../Redux/Action/paymentAction";
+import {
+  transferMoney,
+  verifyOnTransfer,
+} from "../../Redux/Action/paymentAction";
 import { toast } from "react-toastify";
+import { Modal } from "react-bootstrap";
+import { TextField, Button } from "@material-ui/core";
 
 function Transfer() {
   const [listAccount, setListAccount] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [verifyCode, setVerifyCode] = useState("");
+  const [error, setError] = useState();
+  const [accountSelected, setAccountSelected] = useState();
+
   useEffect(() => {
     getListAccount().then((res) => {
       if (res.error) return;
@@ -31,8 +41,11 @@ function Transfer() {
           if (get(res, "data.error")) {
             return toast.error(get(res, "data.error.message"));
           }
-          toast.success("Transfer successfully");
-          reset();
+          console.log("data: ", data);
+          // toast.success("Transfer successfully");
+          // reset();
+          setAccountSelected(data.deposit_account_id);
+          setOpenModal(true);
         })
         .catch((err) => {
           toast.error(
@@ -48,8 +61,50 @@ function Transfer() {
     return true;
   };
 
+  const handleVerifyCode = () => {
+    !verifyCode && setError("Verify code is required");
+    verifyOnTransfer({
+      deposit_account_id: accountSelected,
+      otp_code: verifyCode,
+    })
+      .then((res) => {
+        toast.success("Transfer successfully");
+        setOpenModal(false);
+        reset();
+      })
+      .catch((err) => {
+        toast.error(get(err, "response.data.error") || "Something went wrong");
+      });
+  };
+
   return (
     <div className="transfer-padding">
+      <Modal show={openModal} onHide={() => setOpenModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Check your email and fill verify code:</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <TextField
+            variant="outlined"
+            required
+            label="Verify code"
+            value={verifyCode}
+            onChange={(e) => setVerifyCode(e.target.value)}
+            error={error}
+            helperText={error}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="contained"
+            color="primary"
+            className="submit"
+            onClick={handleVerifyCode}
+          >
+            Verify
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="transfer-body">
         <form className="transfer-head" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="transfer-h1">VNBC TRANSFER MONEY</h1>

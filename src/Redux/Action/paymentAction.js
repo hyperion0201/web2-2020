@@ -39,3 +39,7 @@ export const withdrawal = (data) => {
 export const withdrawMoneySaving = (data) => {
   return request("POST", "account/withdraw", { data });
 };
+
+export const verifyOnTransfer = (data) => {
+  return request("POST", "transaction/otp-confirmation", { data });
+};

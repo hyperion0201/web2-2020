@@ -22,7 +22,8 @@
     display: flex;
     flex-direction: column;
     min-width: 300px;
-    select, input {
+    select,
+    input {
       padding: 0 20px;
     }
     .input-field {
@@ -71,4 +72,7 @@
   background-image: url("/images/background-tranfer.jpg");
   background-size: cover;
   height: 100%;
+  .modal-title {
+    font-size: 18px;
+  }
 }
