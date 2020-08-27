@@ -32,7 +32,10 @@ export const deposit = (data) => {
   return request("POST", "account/charge", { data });
 };
 
-export const withdrawMoney = (data) => {
-  return request("POST", "account/withdraw", { data });
+export const withdrawal = (data) => {
+  return request("POST", "transaction/cashout", { data });
 };
 
+export const withdrawMoneySaving = (data) => {
+  return request("POST", "account/withdraw", { data });
+};
