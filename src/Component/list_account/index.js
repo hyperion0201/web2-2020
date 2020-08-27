@@ -97,12 +97,11 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
       sav_account_id: accountSelected.account_id,
     })
       .then((res) => {
-        console.log("res: ", res);
         setShow(false);
-        window.location.reload(false);
+        handleGetListAccount();
       })
       .catch((err) => {
-        console.log("err: ", err);
+        toast.error(get(err, "response.data.error"));
       });
   };
 
@@ -128,6 +127,8 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
       if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
       else if (res.status === 200) {
         toast.success(get(res, "data.message"));
+        close2();
+        getAccountByStaff(selectedItem.id);
       }
     });
   };
@@ -258,14 +259,16 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
                         {new Date(account.maturity_date).toLocaleString()}
                       </td>
                       {isStaff ? (
-                        <td className="btn-withdraw-money">
-                          <Button
-                            variant="danger"
-                            onClick={() => handleShow2(account)}
-                          >
-                            Active
-                          </Button>
-                        </td>
+                        !account.active && (
+                          <td className="btn-withdraw-money">
+                            <Button
+                              variant="danger"
+                              onClick={() => handleShow2(account)}
+                            >
+                              Active
+                            </Button>
+                          </td>
+                        )
                       ) : (
                         <td className="btn-withdraw-money">
                           <Button
