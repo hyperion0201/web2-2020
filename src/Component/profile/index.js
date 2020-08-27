@@ -176,7 +176,7 @@ const ModalUpload = () => {
     if (!fileUpload) return;
     verifyUser({ identity: fileUpload })
       .then((res) => {
-        //window.location.replace("/");
+        window.location.replace("/");
       })
       .catch((err) => {
         return toast.error(

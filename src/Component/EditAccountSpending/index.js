@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { deposit } from "../../Redux/Action/paymentAction";
-import { Drawer, Button, TextField, Typography } from "@material-ui/core";
+import { deposit, withdrawal } from "../../Redux/Action/paymentAction";
+import { Drawer, Button, TextField, Typography, Grid } from "@material-ui/core";
+import { ToggleButton } from "@material-ui/lab";
 import { toast } from "react-toastify";
 import { get } from "lodash";
 
 function EditAccountSpending() {
   const [showEditAccount, setEditAccount] = useState(false);
+  const [action, setAction] = useState();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -21,17 +23,31 @@ function EditAccountSpending() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = {
+    const dataDeposit = {
       account_id: formData.get("account_id"),
       amount: formData.get("amount"),
     };
-    deposit(data).then((res) => {
-      if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
-      else if (res.status === 200) {
-        toast.success(get(res, "data.message"));
-        window.location.replace("/user-management");
-      }
-    });
+    const dataWithdrawal = {
+      spending_account_id: formData.get("account_id"),
+      amount: formData.get("amount"),
+    };
+    if (action === "deposit") {
+      deposit(dataDeposit).then((res) => {
+        if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
+        else if (res.status === 200) {
+          toast.success(get(res, "data.message"));
+          window.location.replace("/user-management");
+        }
+      });
+    } else {
+      withdrawal(dataWithdrawal).then((res) => {
+        if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
+        else if (res.status === 200) {
+          toast.success(get(res, "data.message"));
+          window.location.replace("/user-management");
+        }
+      });
+    }
   };
 
   return (
@@ -69,6 +85,31 @@ function EditAccountSpending() {
                   label="Amount"
                   name="amount"
                 />
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-around"
+                  alignItems="stretch"
+                >
+                  <ToggleButton
+                    value="deposit"
+                    id="deposit"
+                    name="deposit"
+                    className="btn-action"
+                    onChange={(e) => setAction(e.currentTarget.value)}
+                  >
+                    Deposit
+                  </ToggleButton>
+                  <ToggleButton
+                    value="withdrawal"
+                    id="withdrawal"
+                    name="withdrawal"
+                    className="btn-action"
+                    onChange={(e) => setAction(e.currentTarget.value)}
+                  >
+                    Withdrawal
+                  </ToggleButton>
+                </Grid>
                 <Button
                   type="submit"
                   fullWidth

@@ -12,7 +12,7 @@ import { deposit } from "../../Redux/Action/paymentAction";
 import { get, filter } from "lodash";
 import TransactionHistory from "../transaction";
 import { toast } from "react-toastify";
-import { withdrawMoney } from "../../Redux/Action/paymentAction";
+import { withdrawMoneySaving } from "../../Redux/Action/paymentAction";
 
 function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   const [accounts, setAccounts] = useState([]);
@@ -105,7 +105,7 @@ function List_account({ isModal, handleClose, selectedItem, isStaff }) {
   };
 
   const onWithdrawMoney = () => {
-    withdrawMoney({
+    withdrawMoneySaving({
       des_account_id: desAccount,
       sav_account_id: accountSelected.account_id,
     })
