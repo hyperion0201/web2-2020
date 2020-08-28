@@ -41,7 +41,7 @@ function EditAccountSpending() {
       });
     } else {
       withdrawal(dataWithdrawal).then((res) => {
-        if (get(res, "data.error")) toast.error(get(res, "data.error.message"));
+        if (get(res, "data.error")) toast.error(get(res, "data.error"));
         else if (res.status === 200) {
           toast.success(get(res, "data.message"));
           window.location.replace("/user-management");
