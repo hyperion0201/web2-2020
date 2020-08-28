@@ -84,12 +84,14 @@ function Signup() {
               name="email"
               autoComplete="email"
             />
+           
             <Grid
               container
               direction="row"
               justify="center"
               alignItems="center"
             >
+            <div className="identity-field">
               <Grid item xs="3">
                 <FormControl variant="outlined" className="type-identity">
                   <InputLabel id="identity_type">Type</InputLabel>
@@ -103,6 +105,7 @@ function Signup() {
                 </FormControl>
               </Grid>
               <Grid item xs="5">
+              <div className="identity-id-field">
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -112,8 +115,11 @@ function Signup() {
                   label="Identity ID"
                   name="identity_id"
                 />
+                </div>
               </Grid>
               <Grid item xs="4">
+              <div className="identity-id-field">
+
                 <TextField
                   id="identity_issued_date"
                   label="Date of issue"
@@ -125,8 +131,11 @@ function Signup() {
                     shrink: true,
                   }}
                 />
+                </div>
               </Grid>
+              </div>
             </Grid>
+            
             <TextField
               variant="outlined"
               margin="normal"

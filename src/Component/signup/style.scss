@@ -2,6 +2,19 @@
   background-image: url("/images/login-background.jpg");
   background-size: cover;
   padding:70px 0;
+  .identity-field{
+    display: flex;
+    align-items: center;
+    padding-right:13px;
+    @media (max-width:585px){
+      flex-direction: column;
+      width: 100%;
+      align-items: end;
+      .identity-id-field{
+        min-width: 180px;
+      }
+    }
+  }
   .paper {
     color: black;
     background: white;
@@ -35,3 +48,4 @@
   color: red;
   font-size: 14px;
 }
+  
